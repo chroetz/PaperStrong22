@@ -1,0 +1,117 @@
+%
+\section{Strong Laws for $\mf c$-Fréchet Mean Sets}\label{sec:gen}
+%
+Let $(\mc Q, d)$ be a metric space, the descriptor space. Let $\mc Y$ be a set, the data space. Let $\mf c\colon \mc Y \times\mc Q \to \R$ be a function, the cost function. Let $(\Omega, \Sigma, \Pr)$ be a probability space that is silently underlying all random variables in this section. Let $Y$ be a random variable with values in $\mc Y$. Denote the $\mf c$-Fréchet mean set of $Y$ as $M = \argmin_{q\in\mc Q} \Ex{\mf c(Y, q)}$.
+Let $Y_1, \dots, Y_n$ be independent random variables with the same distribution as $Y$.
+Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. Set $M_n = \epsilon_n\text{-}\argmin_{q\in\mc Q} \frac1n \sum_{i=1}^n \mf c(Y_i, q)$.
+%
+\begin{assumptions}\mbox{ }
+\begin{itemize}
+\item 
+	\textsc{Polish}: 
+	$(\mc Q, d)$ is separable and complete.
+\item 
+	\textsc{LowerSemiContinuity}: 
+	$q \mapsto \mf c(y, q)$ is lower semi-continuous.
+\item 
+	\textsc{Integrable}: 
+	$\Ex{\abs{\mf c(Y, q)}} < \infty$ for all $q\in\mc Q$.
+\item 
+	\textsc{IntegrableInf}: 
+	$\Ex{\inf_{q \in \mc Q}\mf c(Y, q)} > - \infty$.
+\end{itemize}
+\end{assumptions}
+%
+\begin{theorem}\label{thm:epi}
+	Assume \textsc{Polish}, \textsc{LowerSemiContinuity}, \textsc{Integrable}, and \textsc{IntegrableInf}.
+	Then, almost surely,
+	\begin{equation*}
+		\outerlim_{n\to\infty}\, M_n \subset M
+		\eqfs
+	\end{equation*}
+\end{theorem}
+%
+\begin{proof}
+Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. By \textsc{Integrable}, $F(q)<\infty$.
+\cite[Theorem 1.1]{korf01} states that $F_n \xrightarrow{n\to\infty}_{\ms{epi}} F$ almost surely if \textsc{Polish}, \textsc{LowerSemiContinuity}, and \textsc{IntegrableInf} are true. \autoref{thm:convOfMini} then implies $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
+\end{proof}
+%
+\begin{assumptions}\mbox{ }
+\begin{itemize}
+	\item \textsc{HeineBorel}: Every closed bounded set in $\mc Q$ is compact.
+	\item \textsc{SampleHeineBorel}: Almost surely following is true: There is $N_0\in\N$ such that every closed and bounded subset of $\bigcup_{n\geq N_0} M_n$ is compact.
+	\item \textsc{UpperBound}: $\Ex{\sup_{q\in B} \abs{\mf c(Y,q)}} < \infty$ for all bounded sets $B\subset\mc Q$.
+	\item \textsc{LowerBound}: There are $o\in\mc Q$, $\psi^+, \psi^- \colon [0,\infty) \to [0,\infty)$, $\mf a^+, \mf a^- \in(0,\infty)$, and $\sigma(Y_1, \dots, Y_n)$-measurable random variables $\mf a^+_n, \mf a^-_n \in[0,\infty)$ such that 
+	\begin{align*}
+		\mf a^+ \psi^+(\ol qo) - \mf a^- \psi^-(\ol qo) &\leq \Ex{\mf c(Y, q)}
+		\eqcm\\
+		\mf a^+_n \psi^+(\ol qo) - \mf a^-_n \psi^-(\ol qo) &\leq \frac1n \sum_{i=1}^n \mf c(Y_i, q)
+	\end{align*}
+	for all $q\in\mc Q$. Furthermore, $\mf a^+_n\xrightarrow{n\to\infty}_{\ms{a.s.}}\mf a^+$ and $\mf a^-_n\xrightarrow{n\to\infty}_{\ms{a.s.}}\mf a^-$. Lastly, $\psi^+(\delta)/\psi^-(\delta)\xrightarrow{\delta\to\infty}\infty$.
+	\end{itemize}
+\end{assumptions}
+%
+\begin{remark}\label{rem:on_ass1}\mbox{ }
+\begin{itemize}
+\item 
+	Following implications hold:
+	\begin{align*}
+	\textsc{HeineBorel} &\Rightarrow \textsc{Polish}\eqcm\\
+	\textsc{HeineBorel} &\Rightarrow \textsc{SampleHeineBorel}\eqcm\\
+	\textsc{UpperBound} &\Rightarrow \textsc{Integrable}\eqfs
+	\end{align*}
+\item On \textsc{HeineBorel}:
+	A space enjoying this property is also called \textit{boundedly compact} or \textit{proper} metric space.
+	The Euclidean spaces $\R^s$, finite dimensional Riemannian manifolds, as well as $\mc C^\infty(U)$ for open subsets $U \subset \R^s$  fulfill \textsc{Heine--Borel} \cite[section 8.4.7]{edwards95}.
+	See \cite{williamson87} for a construction of further spaces where \textsc{Heine--Borel} is true. 
+\item On \textsc{SampleHeineBorel} and infinite dimension:
+	If $M_n=\{m_n\}$ and $M=\{m\}$ are singleton sets and $m_n \xrightarrow{n\to\infty} m$ almost surely, then \textsc{SampleHeineBorel} holds. It is less strict than \textsc{HeineBorel}: In separable Hilbert spaces of infinite dimension \textsc{HeineBorel} does not hold. But with the metric $d$ induced by the inner product and $\mf c=d^2$, $\mf c$-Fréchet means are unique and equal to the usual notion of mean. Furthermore, strong laws of large numbers in Hilbert spaces are well-known, see e.g.\ \cite{kawabe86}. Thus, \textsc{SampleHeineBorel} is true. Let it be noted that proving \textsc{SampleHeineBorel} in a space where \textsc{HeineBorel} is false may be of similar difficulty as showing convergence of Fréchet means directly. In the case of infinite dimensional Banach spaces, results on strong laws of large numbers for a different notion of mean -- the Bochner integral -- are well established, see e.g.\ \cite{hoffmann76}.
+\item On \textsc{LowerBound}:
+	We illustrate this condition in the linear regression setting with $\mc Q = \R^{s+1}$, $\mc Y = (\{1\}\times\R^s) \times \R$, $\mf c((x,y),\beta) = (y - \beta\tr x)^2 - y^2 = - 2 \beta\tr x y + \beta\tr xx\tr \beta$. Let $(X, Y)$ be random variables with values in $\mc Y$. Let $(X_1, Y_1),\dots, (X_n, Y_n)$ be independent with the same distribution as $(X,Y)$. We can set $o = 0\in\R^{s+1}$, $\mf a^+ = \lambda_{\ms{min}}(\Ex{XX\tr})$, where $\lambda_{\ms{min}}$ denotes the smallest eigenvalue, $\mf a^- = 2 \normof{\Ex{XY}}$, $\mf a^+_n = \lambda_{\ms{min}}(\frac1n \sum_{i=1}^n X_iX_i\tr)$, $\mf a^-_n = 2 \normof{\frac1n\sum_{i=1}^n X_iY_i}$, $\psi^+(\delta) = \delta^2$ and $\psi^-(\delta) = \delta$. If $\lambda_{\ms{min}}(\Ex{XX\tr}) > 0$, the largest eigenvalue $\lambda_{\ms{max}}(\Ex{XX\tr}) < \infty$, and $\Ex{\normof{XY}} < \infty$, all conditions are fulfilled.
+	
+	For a further application of \textsc{LowerBound}, see the proof of \autoref{cor:nondec:onehaus} in the next section.
+\end{itemize}
+\end{remark}
+%
+\begin{theorem}\label{thm:consistency}
+	Assume \textsc{Polish}, \textsc{LowerSemiContinuity}, \textsc{IntegrableInf},  \textsc{SampleHeineBorel}, \textsc{UpperBound}, and \textsc{LowerBound}. Then
+	\begin{equation*}
+		d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0
+		\eqfs
+	\end{equation*}
+\end{theorem}
+%
+\begin{proof}
+The proof consists of following steps:
+\begin{enumerate}
+\item Apply \autoref{thm:epi}.
+\item Reduction to a bounded set.
+\item Show that $M_n$ is eventually precompact almost surely.
+\item Apply \autoref{thm:outerVsHaus}.
+\end{enumerate}
+%
+\noindent
+\underline{\smash{Step 1.}}
+\textsc{Polish}, \textsc{LowerSemiContinuity}, and \textsc{IntegrableInf} are assumptions. \textsc{UpperBound} implies \textsc{Integrable}. Thus, \autoref{thm:epi} yields $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
+
+\noindent
+\underline{\smash{Step 2.}}
+Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. 
+We want to show that there is a bounded set $B_1 \subset \mc Q$ such that $F(q) \geq F(m) + 1$ and $F_n(q) \geq F_n(m) + 1$ for all $q\in \mc Q \setminus B_1$ and $m \in M$. If $\mc Q$ is bounded, we can take $B_1 = \mc Q$. Assume $\mc Q$ is not bounded. 
+
+Let $m \in M$. By \textsc{UpperBound}, $F(m) < \infty$. Let $o\in\mc Q$ from \textsc{LowerBound}.
+Due to \textsc{LowerBound}, $F(q) \geq \mf a^+ \psi^+(\delta) - \mf a^- \psi^-(\delta) \geq  F(m) + 2$ for all $q\in\mc Q\setminus \ball_\delta(o)$ and $\delta$ large enough. This holds for all $m\in M$ as $F(m)$ does not change with $m$. We set $B_1 = \ball_\delta(o)$. For $F_n$, it holds $F_n(m) \xrightarrow{n\to\infty}_{\ms{a.s.}} F(m)$ and $\inf_{q\in\mc Q \setminus B_1} F_n(q) \geq \mf a^+_n \psi^+(\delta) - \mf a^-_n \psi^-(\delta)$ with $\mf a^+_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^+$ and $\mf a^-_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^-$.
+Thus, there is a random variable $N_1$ such that almost surely $F_n(q) \geq F_n(m) + 1$ for all $n \geq N_1$, $q\in \mc Q \setminus B_1$, and $m\in M$.
+
+%
+\noindent
+\underline{\smash{Step 3.}}
+Take $N_0$ from \textsc{SampleHeineBorel}. Choose $N_2\geq \max(N_0, N_1)$ such that $\epsilon_n < 1$ for all $n \geq N_2$. Then $M_n \subset B_1$ for all $n\geq N_2$. Thus, $\bigcup_{n\geq N_2}M_n$ is bounded and -- due to \textsc{SampleHeineBorel}, \textsc{Polish}, and \autoref{lmm:precompact} -- precompact almost surely. 
+
+\noindent
+\underline{\smash{Step 4.}}
+Finally, step 1 and 3 together with \autoref{thm:outerVsHaus} yield $d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$.
+\end{proof}
+%
+%
+%

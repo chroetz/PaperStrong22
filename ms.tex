@@ -1,0 +1,76 @@
+\documentclass{scrartcl}
+%
+\input{packages}
+\input{macros}
+%
+\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{assumptions}[theorem]{Assumptions}
+%
+%
+%
+%
+%
+\begin{document}
+%
+%
+%
+\title{Strong Laws of Large Numbers for Generalizations of Fréchet Mean Sets}
+\subtitle{\url{https://github.com/chroetz/PaperStrong22}}
+\author{Christof Schötz\\\href{mailto:math@christof-schoetz.de}{math@christof-schoetz.de}}
+\date{}
+\maketitle
+%
+%
+%
+%
+%
+%
+\begin{abstract} 
+\input{abstract}
+\end{abstract}
+%
+\input{frechet_mean_sets}
+\input{deterministic}
+\input{slln_general}
+\input{slln_nondec}
+\input{slln_power}
+%
+%
+\begin{appendix}
+\section{Example: The Set of Medians}\label{sec:median}
+\input{example_median}
+\section{Alternative Route to One-Sided Hausdorff Convergence}\label{sec:alt}
+\input{alt}
+\section{Auxiliary Results}\label{sec:aux}
+\input{ulln}
+\input{nondec}
+\input{basic_fm}
+\input{precompact}
+\end{appendix}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+\bibliographystyle{apalike}
+\bibliography{literature}
+%
+%
+%
+\end{document}%
+%

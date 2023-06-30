@@ -1,0 +1,106 @@
+\section{Convergence of Minimizer Sets of Deterministic Functions}\label{sec:det}
+%
+Let $(\mc Q, d)$ be a metric space. The diameter of a set $B\subset \mc Q$ is defined as $\diam(B) = \sup_{q,p\in B} d(q,p)$. The following notion of convergence of functions will be useful to infer a convergence results of their minimizers.
+%
+\begin{definition}
+	Let $f,f_n \colon \MS\to\R$, $n\in\N$.
+	The sequence $(f_n)_{n\in\N}$ \emph{epi-converges} to $f$ \emph{at} $x\in\MS$ if and only if
+	\begin{align*}
+	\forall (x_n)_{n\in\N} \subset \MS, x_n \to x \colon& \liminf_{n\to\infty} f_n(x_n) \geq f(x)\qquad\text{and}\\
+	\exists (y_n)_{n\in\N} \subset \MS, y_n \to x \colon& \limsup_{n\to\infty} f_n(y_n) \leq f(x)
+	\eqfs
+	\end{align*}
+	The sequence $(f_n)_{n\in\N}$ \emph{epi-converges} to $f$ if and only if it epi-converges at all $x\in\MS$. We then write $f_n\epiconv{n}f$.
+\end{definition}
+%
+We introduce some short notation. Let $f \colon \MS \to \R$ and $\epsilon\geq 0$. Denote $\inf f = \inf_{x\in\MS}f(x)$, $\argmin f = \Set{x \in\MS \given f(x) = \inf f}$, $\epsilon\text{-}\argmin f = \Set{x\in\MS \given  f(x) \leq \epsilon +\inf f }$.
+Let $\delta > 0$ and $x_0\in\mc Q$.
+Denote $\ball_\delta(x_0) = \Set{x\in\MS \given  d(x, x_0) < \delta}$.
+%  and $\ball_\delta(A) = \bigcup_{x\in A} \ball_\delta(x)$. 
+Furthermore, $f$ is called \emph{lower semi-continuous} if and only if  $\liminf_{x\to x_0} f(x) \geq f(x_0)$ for all $x_0\in\mc Q$. 
+%
+
+To state convergence results for minimizing sets of deterministic functions, we need one final definition.
+%
+\begin{definition}
+	A sequence $(B_n)_{n\in\N}$ of sets $B_n \subset \MS$ is called \emph{eventually precompact} if and only if there is $n\in\N$ such that the set 
+$\bigcup_{k=n}^\infty B_k$ is precompact, i.e. its closure is compact.
+\end{definition}
+%
+The first theorem of this section relates epi-convergence of functions to convergence of their sets of minimizers in outer limit.
+%
+\begin{theorem}\label{thm:convOfMini}
+	Let $f,f_n \colon \MS\to\R$. Let $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. 
+		Assume $f_n\epiconv{n}f$.
+		Then
+		\begin{equation*}
+			\outerlim_{n\to\infty}\, \epsilon_n\text{-}\argmin f_n \subset \argmin f
+		\end{equation*}
+		and
+		\begin{equation*}
+			\limsup_{n\to\infty} \inf f_n \leq \inf f
+			\eqfs
+		\end{equation*}
+\end{theorem}
+%
+Large parts of this theorem can be found e.g., in \cite[chapter 7]{rockafellar98}. To make this article more self-contained, we give a proof here.
+%
+\begin{proof}
+		Let $x \in \outerlim_{n\to\infty}\, \epsilon_n\text{-}\argmin f_n$. Then there is a sequence $x_n \in \epsilon_{n}\text{-}\argmin f_{n}$ with a subsequence converging to $x$, i.e., $x_{n_i} \xrightarrow{i\to\infty} x$, where $n_i\xrightarrow{i\to\infty}\infty$.
+		Let $y\in\MS$ be arbitrary. As $f_n\epiconv{n}f$, there is a sequence $(y_n)_{n\in\N}\subset\MS$ with $y_n\xrightarrow{n\to\infty}y$ and $\limsup_{n\to\infty} f_n(y_n) \leq f(y)$. 
+		It holds $f_{n_i}(x_{n_i}) \leq \epsilon_{n_i} + \inf f_{n_i} \leq \epsilon_{n_i} + f_{n_i}(y_{n_i})$. Thus, by the definition of epi-convergence and $\epsilon_n \xrightarrow{n\to\infty} 0$, we obtain
+		\begin{equation*}
+		f(x) 
+		\leq 
+		\liminf_{i\to\infty} f_{n_i}(x_{n_i}) 
+		\leq 
+		\liminf_{i\to\infty} \br{\epsilon_{n_i} + f_{n_i}(y_{n_i})}
+		\leq 
+		\limsup_{i\to\infty} f_{n_i}(y_{n_i}) 
+		\leq 
+		f(y)\eqfs
+		\end{equation*}		
+		Thus, $x \in \argmin f$.
+		Next, we turn to the inequality of the infima. For $\epsilon > 0$ choose an arbitrary $x\in\epsilon\text{-}\argmin f$. There is a sequence $(y_n)_{n\in\N}\subset\MS$ with $y_n\xrightarrow{n\to\infty} x$ and $f_n(y_n)\xrightarrow{n\to\infty} f(x)$. Thus,
+		\begin{equation*}
+			\limsup_{n\to\infty} \inf f_n \leq \limsup_{n\to\infty} f_n(y_n) \leq \inf f + \epsilon
+			\eqfs
+		\end{equation*}
+\end{proof}
+%
+It is illustrative to compare this result with \autoref{thm:alt:convOfMini}, which shows that a stronger notion of convergence for functions -- convergences uniformly on bounded sets -- yields convergence of sets of minimizers in one-sided Hausdorff distance, which is a stronger notion of convergence of sets as the next theorem shows.
+%
+\begin{theorem}\label{thm:outerVsHaus}
+	Let $(B_n)_{n\in\N}$ with $B_n \subset \mc Q$ for all $n\in\N$. Let $B \subset \MS$.
+	\begin{enumerate}[label=(\roman*)]
+		\item If $d_{\subset}(B_n, B) \xrightarrow{n\to\infty} 0$ then $\outerlim_{n\to\infty}\, B_n \subset \overline{B}$.
+		\item Assume $(B_n)_{n\in\N}$ is eventually precompact. If $\outerlim_{n\to\infty}\, B_n \subset \overline{B}$ then $d_{\subset}(B_n, B) \xrightarrow{n\to\infty} 0$.
+	\end{enumerate}	
+\end{theorem}
+%
+%
+\begin{proof}
+	\mbox{ }
+	\begin{enumerate}[label=(\roman*)]
+\item 
+	Assume $d_{\subset}(B_n, B) \xrightarrow{n\to\infty} 0$. Let $x_\infty \in \outerlim_{n\to\infty}\, B_n$, i.e., there is a sequence $(x_{n_k})_{k\in\N}\subset \MS$ with $n_1 < n_2 < \dots$ and $x_{n_k}\in B_{n_k}$ such that $x_{n_k} \xrightarrow{k\to\infty} x_\infty$. Thus, 
+	\begin{equation*}
+		\inf_{x\in B} d(x_\infty, x) \leq d(x_\infty, x_{n_k}) + \inf_{x\in B} d(x_{n_k}, x)  \xrightarrow{k\to\infty} 0\eqfs
+	\end{equation*}
+	This shows $\inf_{x\in B} d(x_\infty, x) = 0$. Hence,
+	\begin{equation*}
+		\outerlim_{n\to\infty}\,B_n \subset \Set{x_\infty \in \MS \given \inf_{x\in B} d(x_\infty, x) = 0} = \overline{B}\eqfs
+	\end{equation*}
+\item	
+	Assume  $\outerlim_{n\to\infty}\, B_n \subset \overline{B}$. Further assume the existence of $\epsilon>0$ and a sequence $(x_{n_k})_{k\in\N}\subset \MS$ with $n_1 < n_2 < \dots$ and $x_{n_k}\in B_{n_k}$ such that $\inf_{x\in B} d(x_{n_k}, x) \geq \epsilon$. As $(B_{n_k})_{k\in\N}$ is eventually precompact, the sequence $(x_{n_k})_{k\in\N}$ has an accumulation point $x_\infty$ in $\overline{\bigcup_{k \geq k_0} B_{n_k}}$ for some $k_0\in\N$ with $\inf_{x\in B} d(x_{\infty}, x) \geq \epsilon$. In particular, $x_{\infty} \not\in \overline{B}$, which contradicts the first assumption in the proof. Thus, a sequence $(x_{n_k})_{k\in\N}$ with these properties cannot exist, which implies $d_{\subset}(B_n, B) \xrightarrow{n\to\infty} 0$.
+	\end{enumerate}
+\end{proof}
+%
+Note that the argument for the second part is essentially the same as in \cite[proof of Theorem A.4]{huckemann11}.
+%
+\begin{remark}\label{rem:epsilon_argmin}
+Together \autoref{thm:convOfMini} and \autoref{thm:outerVsHaus} may yield convergence of minimizers in one-sided Hausdorff distance. But even if $d_{\subset}(\epsilon_n\text{-}\argmin f_n, \argmin f) \xrightarrow{n\to\infty} 0$, $d_\Haus(\epsilon_n\text{-}\argmin f_n, \argmin f)$ does not necessarily vanish unless $\argmin f$ is a singleton.
+Similarly, for an arbitrary sequence $\epsilon_n \xrightarrow{n\to\infty}0$, the outer limit of $\epsilon_n\text{-}\argmin f_n$ may be a strict subset of $\argmin f$.
+But according to \cite[Theorem 7.31 (c)]{rockafellar98}, there exists a sequence $(\epsilon_n)_{n\in\N}$ with $\epsilon_n\xrightarrow{n\to\infty}0$ slow enough such that $\outerlim_{n\to\infty}\epsilon_n\text{-}\argmin f_n = \argmin f$. An explicit example of this phenomenon is presented in appendix \ref{sec:median}.
+\end{remark}
+%

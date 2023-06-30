@@ -1,0 +1,38 @@
+Let $s\in\N$. Consider the metric space $(\R^s, d_1)$, where $d_1(q,p) = \normof{q-p}_1 = \sum_{j=1}^s \abs{q_j-p_j}$. The power Fréchet mean with $\alpha=1$ in this space is equivalent to the standard ($\alpha=2$) Fréchet mean in $(\R^s, d_1^{\frac12})$. For $s=1$ it is equal to the median.
+Let $Y = (Y^1,\dots, Y^s)$ be a random vector in $\R^s$ such that $\Pr(Y^k=0)=\Pr(Y^k=1)=\frac12$ for $k=1,\dots, s$ and $Y^1,\dots, Y^s$ are independent. Let $Y_1, Y_2,\dots$ be independent and identically distributed copies of $Y$. Let $M = \argmin_{q\in\R^s}\Ex{d_1(Y, q)}$ be the Fréchet mean set of $Y$ and $M_n = \epsilon_n\text{-}\argmin_{q\in\R^s}\frac1n\sum_{i=1}^n d_1(Y_i, q)$ its sample version.
+
+\subsection{No Convergence in Hausdorff Distance}
+First consider the case $s=1$ and $\epsilon_n=0$.
+As $s=1$,  $M = \argmin_{q\in\R} \Ex{\abs{Y-q}}$ is the median of $Y$, which is $M = [0,1]$ as $2\Ex{\abs{Y-q}} = \abs{1-q}+\abs{q}$ achieves its minimal value $1$ precisely for all $q\in[0,1]$.
+Define $p_n := \frac1n \sum_{i=1}^n Y_i$. Then the empirical objective function is $F_n(q) := p_n\abs{1-q}+(1-p_n)\abs{q}$, i.e., the sample Fréchet mean set is $M_n = \argmin_{q\in\R} F_n(q)$.
+If $n$ is odd, then either $M_n = \{0\}$ or $M_n = \{1\}$ holds. The same is true for an even value of $n$ except when $p_n=\frac12$, in which case $M_n=[0,1]$.
+Thus, $d_{\subset}(M_n, M) = 0$, but $d_{\Hausdorff}(M_n, M)$ does not converge almost surely.
+
+\subsection{The Outer Limit as a Strict Subset}
+Next, we keep $\epsilon_n=0$, but consider the value of $\outerlim_{n\to\infty} M_n$ in a multi-dimensional setting, i.e., $s\in\N$, as this yields a potentially surprising result:
+By \autoref{lmm:products}, $M$ is just the Cartesian product of the median sets in each dimension, i.e., $M = [0,1]^s$ (this is not to be confused with the geometric median, which is the Fréchet mean with respect to the square root of the Euclidean norm). Similarly, $M_n = \bigtimes_{k=1}^s M_n^k$ decomposes into the sample Fréchet mean sets $M_n^k$ of each dimension $k=1,\dots,s$. It holds $M_n^k = [0,1]$ if and only if the respective value of $p_n^k := \frac1n \sum_{i=1}^n Y_i^k$ is equal to $\frac12$, i.e., if and only if the symmetric simple random walk $S_n^k := \sum_{i=1}^n (2Y_i^k-1)$ hits $0$. Let $N = \#\Set{n\in\N\given S_n^1=\dots=S_n^s=0}$. Let $A\subset \R$ and $B_n\subset \R$ for all $n\in\N$. If $A\subset B_n$ for infinitely many $n$, then $A \subset \outerlim_{n\to\infty} B_n$. Thus, we want to know whether $N$ is finite or infinite. This is answered by \textit{Pólya's Recurrence Theorem} \cite{polya21}. It implies that for $s \in \{1, 2\}$, $N = \infty$ almost surely. Furthermore, if $s\geq 3$, then $N < \infty$ almost surely.
+To find which points are not element of the outer limit of sample Fréchet mean sets, note following fact: For an open subset $A\subset \R$, if $A \subset \R \setminus B_n$ for all but finitely many $n$, then $A \subset \R \setminus \outerlim_{n\to\infty} B_n$.
+We conclude, that in general a vector $x \in [0,1]^s$ is an element of $\outerlim_{n\to\infty} M_n$ if and only if at most two entries are not in $\{0,1\}$, i.e., almost surely
+\begin{equation*}
+	\outerlim_{n\to\infty} M_n = \Set{(x_1,\dots,x_s) \in [0,1]^s \given \#\{k\in\{1,\dots,s\} | x_k \in (0,1)\} \leq 2}
+	\eqfs
+\end{equation*}
+Thus, $\outerlim_{n\to\infty} M_n = M$ for $s\in\{1,2\}$ and $\outerlim_{n\to\infty} M_n \subsetneq M$ for $s \geq 3$.
+
+\subsection{Convergence in Hausdorff Distance}
+Lastly, we use the setting $s=1$ and $\epsilon_n\in[0,\infty)$, where we want to find $\epsilon_n$ such that $[0,1] \subset M_n$.
+At least one of $0$ and $1$ is a minimizer of $F_n(q)=p_n\abs{1-q}+(1-p_n)\abs{q}$ and the $F_n(q)$ is linear on $[0,1]$. Thus, $[0,1] \subset M_n$ if and only if  $\epsilon_n \geq |F_n(0)-F_n(1)|$. This is equivalent to 
+ $|p_n-\frac12| < \frac12\epsilon_n$.
+By Markov's inequality
+\begin{equation*}
+	\PrOf{\abs{p_n-\frac12} \geq \frac12\epsilon_n} \leq \frac{n^{-3} \Ex*{(Y-\frac12)^4}}{2^{-4}\epsilon_n^4}
+	\eqfs
+\end{equation*}
+For $\epsilon_n = n^{-\frac14}$, we obtain
+\begin{equation*}
+	\sum_{n=1}^\infty \PrOf{\abs{p_n-\frac12} \geq \frac12\epsilon_n}  \leq \sum_{n=1}^\infty n^{-2} < \infty
+	\eqfs
+\end{equation*}
+The Borel--Cantelli lemma implies that almost surely and for all $n$ large enough,  $|p_n-\frac12| < \frac12\epsilon_n$ and thus, $[0,1] \subset M_n$. 
+Together with \autoref{cor:median}, we obtain $d_{\Hausdorff}(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$.
+%

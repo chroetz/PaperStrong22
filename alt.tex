@@ -1,0 +1,151 @@
+In this section, we show an alternative proof of a strong law of large numbers for generalized Fréchet mean sets in one-sided Hausdorff distance. Although the final result, \autoref{thm:alt:consistency}, is weaker than \autoref{thm:consistency}, it is very illustrative to follow this line of proof:
+In contrast to the arguments in the main part of the article, it does not rely on the powerful result \cite[Theorem 1.1]{korf01}, which seems to be rather complex to prove. Instead our reasoning here is simpler and more self-contained.
+Furthermore, a comparison between convergence in outer limit and in one-sided Hausdorff distance seems more natural in view of the deterministic results \autoref{thm:convOfMini} and \autoref{thm:alt:convOfMini}, and the stochastic results \autoref{thm:epi} and \autoref{thm:alt:consistency}.
+%
+%
+\subsection{Convergence of Minimizer Sets of Deterministic Functions}\label{ssec:alt:det}
+%
+Let $(\mc Q, d)$ be a metric space. For $A\subset \mc Q$ and $\delta>0$, denote $\ball_\delta(A) = \bigcup_{x\in A} \ball_\delta(x)$. 
+%
+\begin{definition} \mbox{ }
+	\begin{enumerate}[label=(\roman*)]
+	\item 
+		Let $f,f_n \colon \MS\to\R$, $n\in\N$.
+		The sequence $(f_n)_{n\in\N}$  \emph{converges} to $f$ \emph{uniformly on bounded sets} if and only if for every $B\subset \MS$ with $\diam(B)<\infty$,
+		\begin{equation*}
+		\lim_{n\to\infty} \sup_{x\in B}\abs{f_n(x) - f(x)} =0
+		\eqfs
+		\end{equation*}
+		We then write $f_n\ubsconv{n}f$.
+	\item 
+		A sequence $(B_n)_{n\in\N}$ of sets $B_n \subset \MS$ is called \emph{eventually bounded} if and only if
+		\begin{equation*}
+		\limsup_{n\to\infty} \diam\brOf{\bigcup_{k=n}^\infty B_k} < \infty
+		\eqfs
+		\end{equation*}
+	\item 
+		A function $f$ has \emph{approachable minimizers} if and only if for all $\epsilon >0$ there is a $\delta>0$ such that
+		$\delta\text{-}\argmin f \subset B_\epsilon(\argmin f)$.
+	\end{enumerate}	
+\end{definition}
+%
+The last definition directly implies that $d_\subset(\delta\text{-}\argmin f, \argmin f) \xrightarrow{\delta\to0} 0$ is equivalent to $f$ having approachable minimizers. Furthermore, if $f$ has approachable minimizers, then $\argmin f \neq \emptyset$, as for every $\delta>0$ the set $\delta\text{-}\argmin f$ is non-empty, but $\ball_\epsilon(\emptyset)=\emptyset$.
+%
+\begin{theorem}\label{thm:alt:convOfMini}
+	Let $f,f_n \colon \MS\to\R$. Let $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. 
+	Assume $f$ has approachable minimizers, $f_n \xrightarrow{n\to\infty}_{\ubs} f$, and $(\epsilon_n\text{-}\argmin f_n)_{n\in\N}$ is eventually bounded.
+	Then
+	\begin{equation*}
+		d_\subset(\epsilon_n\text{-}\argmin f_n, \argmin f)\xrightarrow{n\to\infty}
+		0
+	\end{equation*}
+	and
+	\begin{equation*}
+		\inf f_n \xrightarrow{n\to\infty} \inf f
+		\eqfs
+	\end{equation*}
+\end{theorem}
+%
+\begin{proof}
+		Let $\epsilon >0$. As $f$ has approachable minimizers, there is $\delta > 0$ such that $(3\delta)\text{-}\argmin f \subset \ball_\epsilon(\argmin f)$; also $\argmin f \neq \emptyset$. Let $y\in\argmin f$. As $f_n(y) \xrightarrow{n\to\infty} f(y)$, there is $n_1\in\N$ such that $\inf f_n \leq \inf f + \delta$ for all $n \geq n_1$.		
+		As $\epsilon_n \xrightarrow{n\to\infty} 0$, there is $n_2\in\N$ such that $\epsilon_n \leq \delta$ for all $n \geq n_2$.
+		As $(\epsilon_n\text{-}\argmin f_n)_{n\in\N}$ is eventually bounded, there is $n_3\in\N$ such that $\diam(B) < \infty$ for $B = \bigcup_{n\geq n_3} \epsilon_n\text{-}\argmin f_n$.
+		As $f_n \xrightarrow{n\to\infty}_{\ubs} f$ there is $n_4$ such that $\sup_{x\in B}\abs{f_n(x) - f(x)} \leq \delta$.
+		Let $n \geq \max(n_1, n_2, n_3, n_4)$ and $x \in \epsilon_n\text{-}\argmin f_n$. Then
+		\begin{equation*}
+			f(x) \leq f_n(x) + \delta \leq \inf f_n + 2\delta \leq \inf f + 3\delta\eqfs
+		\end{equation*}
+		Thus, $x \in (3\delta)\text{-}\argmin f$. By the choice of $\epsilon$ and $\delta$, we obtain $\epsilon_n\text{-}\argmin f_n \subset \ball_\epsilon(\argmin f)$ or equivalently $d_{\subset}(\epsilon_n\text{-}\argmin f_n, \argmin f) \leq \epsilon$.
+		
+		Finally, we show the convergence of the infima. We already know $\inf f_n \leq \inf f + \epsilon$ for all $\epsilon > 0$ and $n$ large enough.
+		If $\inf f_n \xrightarrow{n\to\infty} \inf f$ does not hold, there is a sequence $x_n \in \epsilon_n\text{-}\argmin f_n$ and $\epsilon > 0$ such that $f_n(x_n) < \inf f - \epsilon$ for all $n$ large enough. As before, because of eventual boundedness and uniform convergence on bounded sets, we have $\sup_{k\in\N}\abs{f_n(x_k) - f(x_k)} \xrightarrow{n\to\infty} 0$. Therefore, for all $\epsilon >0$ we have $f(x_n) \leq f_n(x_n) + \epsilon$ for $n$ large enough, which contradicts $f_n(x_n) < \inf f - \epsilon$.
+\end{proof}
+%
+In the following, we construct examples to show that none of the conditions for one-sided Hausdorff convergence can be dropped.
+%
+\begin{example}\label{exa:alt:necessary}
+\mbox{ }
+\begin{enumerate}[label=(\roman*)]
+	\item 
+	Let $f,f_n\colon \N_0 \to \R$, $f_n = 1-\indOf{\cb{0,n}}$, $f = 1-\indOf{\cb{0}}$, $d(i,j) = 1$ for $i\neq j$.
+	It holds that $f$ is continuous and has approachable minimizers, and the sequence of nonempty sets $\argmin f_n = \cb{0,n}$ is eventually bounded, as $\diam(A)\leq1$ for every $A\subset\N_0$. Furthermore, $f_n$ converges to $f$ uniformly on compact sets, which are exactly the finite subsets of $\N_0$, but not uniformly on bounded sets like $\N_0$ itself.
+	There is a subsequence of minimizers $x_n=n\in \argmin f_n$ that is always bounded away from $0$, the minimizer of $f$.
+	This shows that uniform convergence on compact sets (instead of bounded sets) is not enough.
+	\item
+	As above, let $f, f_n\colon \N_0 \to \R$, $f_n = 1-\indOf{\cb{0,n}}$, $f = 1-\indOf{\cb{0}}$, but define $d(i,j) = |i-j|$.
+	It holds that $f$ is continuous and has approachable minimizers, and $f_n\ubsconv{n}f$, but the sequence of nonempty sets $\argmin f_n = \cb{0,n}$ is not eventually bounded. 
+	Again, there is a subsequence of minimizers $x_n=n\in \argmin f_n$ that is always bounded away from $0$, the minimizer of $f$.
+	This shows that eventual boundedness of minimizer sets cannot be dropped.
+	\item
+	Let $f,f_n\colon \N_0 \to \R$, $f(0) = 0$, $f(i) = \frac1i$, $f_n(i) = f(i)\indOfEvent{i < n}$, and set $d(i,j) = 1$  for $i\neq j$.
+	It holds that $f$ is continuous, but $f$ does not have approachable minimizers. The sequence of nonempty sets $\argmin f_n = \cb{0,n, n+1, \dots}$ is eventually bounded and $f_n\ubsconv{n}f$.
+	There is a subsequence of minimizers $x_n=n\in \argmin f_n$ that is always bounded away from $0$, the minimizer of $f$.
+	This shows that approachability of minimizers of $f$ cannot be dropped.
+\end{enumerate}
+\end{example}
+%
+%
+\subsection{Strong Laws for $\mf c$-Fréchet Mean Sets}\label{ssec:alt:gen}
+%
+Let $(\mc Q, d)$ be a metric space, the descriptor space. Let $\mc Y$ be a set, the data space. Let $\mf c\colon \mc Y \times\mc Q \to \R$ be a function, the cost function. Let $(\Omega, \Sigma, \Pr)$ be a probability space that is silently underlying all random variables in this section. Let $Y$ be a random variable with values in $\mc Y$. Denote the $\mf c$-Fréchet mean set of $Y$ as $M = \argmin_{q\in\mc Q} \Ex{\mf c(Y, q)}$.
+Let $Y_1, \dots, Y_n$ be independent random variables with the same distribution as $Y$.
+Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. Set $M_n = \epsilon_n\text{-}\argmin_{q\in\mc Q} \frac1n \sum_{i=1}^n \mf c(Y_i, q)$.
+%
+\begin{assumptions}\mbox{ }
+\begin{itemize}
+	\item \textsc{Continuity}:  The function $q \mapsto \mf c(Y, q)$ is continuous almost surely.
+	\end{itemize}
+\end{assumptions}
+%
+\begin{theorem}\label{thm:alt:consistency}
+	Assume \textsc{HeineBorel}, \textsc{Continuity}, \textsc{UpperBound}, and \textsc{LowerBound}. Then
+	\begin{equation*}
+		d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0
+		\eqfs
+	\end{equation*}
+\end{theorem}
+%
+\begin{proof}
+Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$.  The proof consists of following steps:
+\begin{enumerate}
+\item Show that $F_n \xrightarrow{n\to\infty}_{\ubs} F$ almost surely.
+\item Reduction to a bounded set.
+\item Show that $F$ has approachable minimizers.
+\item Show that $M_n$ is eventually bounded.
+\item Apply \autoref{thm:alt:convOfMini}.
+\end{enumerate}
+%
+\underline{\smash{Step 1.}}
+To show uniform convergence on bounded sets, we will use the uniform law of large numbers, \autoref{thm:ULLN} below.
+Let $B\subset\mc Q$ be a bounded set.
+By \textsc{HeineBorel}, $\overline{B}$ is compact.
+By \textsc{Continuity}, $q \mapsto \mf c(Y, q)$ is almost surely continuous.
+By \textsc{UpperBound}, $\Ex{ \sup_{q\in B}\abs{\mf c(Y, q)}} < \infty$. Thus, \autoref{thm:ULLN} implies that $q \mapsto F(q)$ is continuous and
+\begin{equation*}
+	\sup_{q\in B}  \abs{F_n(q)-F(q)} \xrightarrow{n\to\infty}_{\ms{a.s.}}0
+	\eqfs
+\end{equation*}
+Fix an arbitrary element $o\in\mc Q$. For all bounded sets $B$, there is $\delta \in\N$ such that $B \subset \ball_\delta(o)$. By the previous considerations, uniform convergence holds almost surely for all $(\ball_{\delta}(o))_{\delta\in\N}$.
+Thus, $F_n \xrightarrow{n\to\infty}_{\ubs} F$ almost surely.
+
+%
+\noindent
+\underline{\smash{Step 2.}}
+Find $B_1\subset\mc Q$ and a random variable $N_1\in\N$ as in step 2 in the proof of \autoref{thm:consistency}.
+
+%
+\noindent
+\underline{\smash{Step 3.}}
+Clearly, $M \subset B_1$ is bounded. Furthermore, for all $\epsilon > 0$ small enough the set $D_\epsilon = \overline{B_1 \setminus \ball_\epsilon(M)}$ is not empty (if it is, increase $\delta$), does not contain any element of $M$ and, by \textsc{HeineBorel}, is compact. Thus, the continuous function $q\mapsto F(q)$ attains its infimum on $D_\epsilon$ where $\inf_{q\in D_\epsilon} F(q) > \inf_{q\in \mc Q} F(q)$. Take $\zeta = \min(1, \frac12(\inf_{q\in D_\epsilon} F(q) - \inf_{q\in \mc Q} F(q)))$. Then $\zeta\text{-}\argmin_{q\in\mc Q} F(q) \subset \ball_\epsilon(M)$, i.e., $F$ has approachable minimizers. 
+
+%
+\noindent
+\underline{\smash{Step 4.}}
+For $\epsilon_n < 1$ and $n \geq N_1$, it holds $M_n \subset B_1$. Thus, $(M_n)_{n\in\N}$ is eventually bounded almost surely.
+
+%
+\noindent
+\underline{\smash{Step 5.}}
+Finally, \autoref{thm:alt:convOfMini} implies $d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$.
+\end{proof}
+%

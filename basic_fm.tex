@@ -1,0 +1,11 @@
+\begin{lemma}[Fréchet means in product spaces]\label{lmm:products}
+Let $K\in\N$. Let $(\mc Q_1, d_1), \dots, (\mc Q_K, d_K)$ be metric spaces. 
+Let $\alpha\geq1$.
+Set $\mc Q := \bigtimes_{k=1}^K \mc  Q_k$ and $d \colon \mc Q \times \mc Q \to [0,\infty)$, $d(q,p) := (\sum_{k=1}^K d_k(q_k, p_k)^\alpha)^\frac1\alpha$. Then $(\mc Q, d)$ is a metric space. Let $Y = (Y^1, \dots, Y^K)$ be a tuple of random variables such that $Y^k$ has values in $\mc Q_k$ and $\Ex{d(Y,o)^{\alpha-1}} < \infty$ for an element $o\in\mc Q$. Let $M$ be the $\alpha$-Fréchet mean set of $Y$ in $(\mc Q, d)$, and $M^k$ be the $\alpha$-Fréchet mean set of $Y^k$ in $(\mc Q_k, d_k)$. Then $M$ is the Cartesian product of the sets $M^k$, i.e.,
+\begin{equation*}
+	M = \bigtimes_{k=1}^K M^k
+	\eqfs
+\end{equation*}
+\end{lemma}
+%
+\autoref{lmm:products} can be proven by straight forward calculations.

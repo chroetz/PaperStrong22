@@ -1,0 +1,74 @@
+There are many versions of uniform laws of large numbers in the literature. We state and prove one version that is tailored to our needs.
+\begin{theorem}\label{thm:ULLN}
+Let $(\mc Y, \Sigma_{\mc Y})$ be a measurable space and $Y$ be a random variable with values in $\mc Y$. Let $Y_1, \dots, Y_n$ be independent and have the same distribution as $Y$.
+Let $(\mc Q, d)$ be a metric space and $B\subset \mc Q$ compact. 
+Let $f \colon \mc Y \times B \to \R$ be such that $q \mapsto f(Y, q)$  is almost surely continuous. Assume there is a random variable $Z$ such that $\abs{f(Y, q)} \leq Z$ for all $q \in B$ with $\Ex{Z} < \infty$. Then $q \mapsto \Ex{f(Y, q)}$ is continuous and 
+\begin{equation*}
+	\sup_{q\in B} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q) - \Ex{f(Y, q)}} \xrightarrow{n\to\infty}_{\ms{a.s.}} 0 
+	\eqfs
+\end{equation*}
+\end{theorem}
+%
+\begin{proof}
+Let $\epsilon > 0$. As $B$ is compact, there is a finite set $\cb{q_1, \dots, q_k} \subset \mc Q$ such that $B \subset \bigcup_{\ell=1}^k\ball_\epsilon(q_\ell)$. We split the supremum,
+\begin{align*}
+	&\sup_{q\in B} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q) - \Ex{f(Y, q)}}
+	\\&\leq
+	\sup_{\ell \in \cb{1,\dots, k}} 
+	\sup_{q\in \ball_\epsilon(q_\ell)}  
+		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}} 
+	\\&\quad+ 
+	\sup_{\ell \in \cb{1,\dots, k}} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q_\ell) - \Ex{f(Y, q_\ell)}}
+	\eqfs
+\end{align*}
+For the second summand, by the standard strong law of large numbers applied to each $\ell\in\{1,\dots,k\}$ with $\Ex{Z} < \infty$, 
+\begin{align*}
+\sup_{\ell \in \cb{1,\dots, k}} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q_\ell) - \Ex{f(Y, q_\ell)}} \xrightarrow{n \to \infty}_{\ms{a.s.}} 0
+\eqfs
+\end{align*}
+For the first summand,
+\begin{align*}
+	&\sup_{\ell \in \cb{1,\dots, k}} 
+	\sup_{q\in \ball_\epsilon(q_\ell)}  
+		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}} 
+	\\& \leq
+	\frac 1n \sum_{i=1}^n \sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y_i, q) - f(Y_i, p)} 
+	+ 
+	\Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q) - f(Y, p)}} 
+	\eqfs
+\end{align*}
+By the standard strong law of large numbers with $\Ex{Z} < \infty$, 
+\begin{align*}
+	\frac 1n \sum_{i=1}^n \sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y_i, q) - f(Y_i, p)} 
+	&\xrightarrow{n \to \infty}_{\ms{a.s.}} 
+	\Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q) - f(Y, p)} }
+	\eqfs
+\end{align*}
+Thus,
+\begin{equation}\label{eq:ulln:as_limsup}
+	\PrOf{
+		\limsup_{n\to\infty} \sup_{q\in B} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q) - \Ex{f(Y, q)}}
+		\leq
+		a_\epsilon
+	} = 1
+	\eqcm
+\end{equation}
+where $a_\epsilon = 2 \Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q) - f(Y, p)} }$.
+As $q \mapsto f(Y, q)$ is almost surely continuous and $B$ is compact, $q \mapsto f(Y, q)$ is almost surely uniformly continuous, i.e., for all $\delta > 0$ there is $\varepsilon(\delta, Y) > 0$ such that $\abs{f(Y,q)-f(Y,p)} \leq \delta$ for all $\ol qp \leq \varepsilon(\delta, Y)$.
+As $\Ex{Z} < \infty$, we can use dominated convergence to obtain 
+\begin{align*}
+	\lim_{\epsilon\searrow0} 	\Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, p) - f(Y, p)} }
+	&=
+	\Ex*{\lim_{\epsilon\searrow0}\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, p) - f(Y, p)} }
+	=
+	0
+	\eqfs
+\end{align*}
+Thus, $a_\epsilon \xrightarrow{\epsilon\searrow0} 0$. Together with \eqref{eq:ulln:as_limsup}, this implies
+\begin{equation*}
+ \sup_{q\in B} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q) - \Ex{f(Y, q)}} \xrightarrow{n \to \infty}_{\ms{a.s.}} 0
+ \eqfs
+\end{equation*}
+We have also shown that $q\mapsto \Ex{f(Y, q)}$ is continuous, as $\abs{\Ex{f(Y, q)}-\Ex{f(Y, p)}} \leq a_{\sol qp}$.
+\end{proof}
+%

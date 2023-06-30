@@ -1,0 +1,92 @@
+%
+\section{Strong Laws for $H$-Fréchet Mean Sets}\label{sec:nondec}
+%
+Let $(\mc Q, d)$ be a metric space. Let $(\Omega, \Sigma, \Pr)$ be a probability space that is silently underlying all random variables in this section. Let $Y$ be a random variable with values in $\mc Q$.
+Let $h \colon [0,\infty) \to [0,\infty)$ be a non-decreasing function.
+Define $H \colon [0,\infty) \to [0,\infty), x\mapsto \int_0^x h(t) \dl t$.
+Fix an arbitrary element $o\in\mc Q$. Denote the $H$-Fréchet mean set of $Y$ as $M = \argmin_{q\in\mc Q} \Ex{H(\ol Yq) - H(\ol Yo)}$.
+Let $Y_1, \dots, Y_n$ be independent random variables with the same distribution as $Y$.
+Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. Set $M_n = \epsilon_n\text{-}\argmin_{q\in\mc Q} \frac1n \sum_{i=1}^n (H(\ol {Y_i}q) - H(\ol {Y_i}o))$.
+%
+\begin{assumptions}\mbox{ }
+	\begin{itemize}
+	\item \textsc{InfiniteIncrease}:
+		$h(x) \xrightarrow{x\to\infty} \infty$.
+	\item \textsc{Additivity}:
+		There is $b \in [1,\infty)$ such that $h(2x) \leq b h(x)$ for all $x \geq 0$.
+	\item \textsc{$h$-Moment}: 
+		$\Ex{h(\ol Yo)} < \infty$.
+	\end{itemize}
+\end{assumptions}
+%
+\begin{remark}\mbox{ }
+\begin{itemize}
+\item On \textsc{Additivity}:
+	This implies $h(x+y)\leq b(h(x) + h(y))$ for all $x,y\geq 0$, see \autoref{lmm:nondec} (appendix).
+	If $h$ is concave, \textsc{Additivity} holds with $b=2$ and we even have $h(x+y)\leq h(x) + h(y)$.
+	This condition is not very restrictive, but it excludes functions that grow exponentially.
+\end{itemize}
+\end{remark}
+%
+%
+\begin{corollary}\label{cor:nondec:epi}
+	Assume \textsc{Polish}, \textsc{Additivity}, and \textsc{$h$-Moment}.
+	Then, almost surely, 
+	\begin{equation*}
+		\outerlim_{n\to\infty}\, M_n \subset M
+		\eqfs
+	\end{equation*}
+\end{corollary}
+%
+\begin{proof}
+	We check the conditions of \autoref{thm:epi}. \textsc{Polish} is an assumption. 
+	\textsc{LowerSemiContinuity} is fulfilled as $(q,p)\mapsto d(q,p)$ and $x \mapsto H(x)$ are continuous.
+	For \textsc{Integrable}, we note that $H$ is non-decreasing and apply \autoref{lmm:nondec} (i),
+	\begin{align*}
+		\abs{H(\ol yq) - H(\ol yo)} 
+		&\leq 
+		\abs{\ol yq - \ol yo} h\brOf{\max(\ol yq, \ol yo)}
+		\\&\leq 
+		\ol qo\, h(\ol qo + \ol yo)
+		\\&\leq 
+		b\, \ol qo \br{h(\ol qo) + h(\ol yo)}
+		\eqcm
+	\end{align*}
+	where the last inequality follows from \autoref{lmm:nondec} (ii) using \textsc{Additivity}.
+	Thus, \textsc{$h$-Moment} implies \textsc{Integrable}.
+	To show \textsc{IntegrableInf}, we note that $H$ is non-decreasing and apply \autoref{lmm:nondec} (iii),
+	\begin{align*}
+		H(\ol yq) - H(\ol yo)
+		&\geq 
+		H(\abs{\ol yo - \ol qo}) - H(\ol yo)
+		\\&\geq 
+		b^{-1} H( \ol qo) - 2  \,\ol qo\, h( \ol yo)
+	\end{align*}
+	due to \textsc{Additivity}. Furthermore, $H(\delta)  = \int_0^\delta h(x) \dl x \geq \frac12 \delta h(\frac12 \delta)$.
+	With that, \textsc{$h$-Moment} implies \textsc{IntegrableInf}. 
+	Thus, \autoref{thm:epi} can be applied.
+\end{proof}
+%
+\begin{corollary}\label{cor:nondec:onehaus}
+	Assume \textsc{SampleHeineBorel}, \textsc{Polish}, \textsc{Additivity}, \textsc{InfiniteIncrease}, and \textsc{$h$-Moment}.
+	Then
+	\begin{equation*}
+		d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0
+		\eqfs
+	\end{equation*}
+\end{corollary}
+%
+\begin{proof}
+	We check the conditions of \autoref{thm:consistency}. \textsc{SampleHeineBorel} and \textsc{Polish} are assumptions of the corollary. \textsc{LowerSemiContinuity} and \textsc{IntegrableInf} are shown in the proof of \autoref{cor:nondec:epi}.
+	Following that proof, we find, due to \textsc{Additivity},
+	\begin{align*}
+		\abs{H(\ol yq) - H(\ol yo)} &\leq b\, \ol qo \br{h(\ol qo) + h(\ol yo)}\eqcm
+		\\
+		H(\ol yq) - H(\ol yo) &\geq 	b^{-1} H( \ol qo) - 2 \,\ol qo\, h( \ol yo)\eqcm\\
+		H(\delta)  &\geq \frac12 \delta h\brOf{\frac12 \delta}
+		\eqfs
+	\end{align*}
+	The first inequality together with \textsc{$h$-Moment} implies \textsc{UpperBound}.
+	For \textsc{LowerBound}, we use the second inequality. We set $\psi^+(\delta) = 	b^{-1} H(\delta)$, $\psi^-(\delta) = 2 \delta$, $\mf a^+=\mf a_n^+ = 1$, $\mf a^{-} = \Ex{h(\ol Yo)}$, and $\mf a^-_n = \frac1n \sum_{i=1}^n h(\ol {Y_i}o)$ with $\mf a^-_n\xrightarrow{n\to\infty}_{\ms{a.s.}}\mf a^-$ due to \textsc{$h$-Moment}. Because of the third inequality, $\psi^+(\delta)/\psi^-(\delta) \geq \frac14 b^{-1} h(\frac12 \delta) \xrightarrow{\delta\to\infty} \infty$ by \textsc{InfiniteIncrease}.
+\end{proof}
+%

@@ -1,0 +1,96 @@
+\begin{lemma}\label{lmm:nondec}
+Let $h \colon [0,\infty) \to [0,\infty)$ be a non-decreasing function.
+Define $H \colon [0,\infty) \to [0,\infty), x\mapsto \int_0^x h(t) \dl t$.
+Let $x, y \geq 0$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\abs{H(x) - H(y)} \leq \abs{x-y}h(\max(x, y))$.
+\end{enumerate}
+Assume, there is $b \in [1,\infty)$ such that $h(2u) \leq b h(u)$ for all $u \geq 0$. Then
+\begin{enumerate}[label=(\roman*),start=2]
+\item $\frac12 h(x) + \frac12 h(y) \leq h (x+y) \leq b \br{h(x) + h(y)}$,
+\item $H(\abs{x-y}) - H(x) \geq b^{-1} H(y) - 2 y h(x)$.
+\end{enumerate}
+\end{lemma}
+%
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+\item This is a direct consequence of the mean value theorem.
+\item As $h$ is non-decreasing, $\max(h(x), h(y)) \leq h(x+y) \leq \max(h(2x), h(2y))$.
+	By the definition of $b$ and with $\frac12(u+v) \leq \max(u,v) \leq u+v$ for $u,v \geq 0$ the claim follows.
+\item 
+	First, consider the case $x\geq y$.
+ 	Define $f(x,y) = H(x-y)-H(x)- b^{-1} H(y) + 2 y h(x)$.
+ 	We want to show $f(x, y)\geq0$.
+	The derivative of $f$ with respect to $y$ is 
+	\begin{equation*}
+		\partial_y f(x, y) = -h(x-y) - b^{-1}h(y) + 2 h(x)\eqfs
+	\end{equation*} 
+	By applying the first inequality of (ii) to $h(x) = h((x-y) + y)$, we obtain $\partial_y f(x, y)  \geq 0$ as $b^{-1} \leq 1$.
+	Hence, $f(x, y) \geq f(x, 0) = 0$, as $H(y) = 0$.
+	
+	Now, consider the case $x \leq y$. Set $g(x,y) = H(y-x) - H(x) - b^{-1} H(y) + 2 y h(x)$, which yields
+	\begin{equation*}
+		\partial_y g(x, y) = h(y-x) - b^{-1} h(y) + 2 h(x)\eqfs
+	\end{equation*} 
+	By applying the second inequality of (ii) to $h(y) = h((y-x) + x)$, we obtain $\partial_y g(x, y)  \geq 0$ as $b^{-1} \leq 1$.
+	Thus, $g(x, y) \geq g(x, x) = -(1 + b^{-1}) H(x) + 2 x h(x)$ as $H(0) = 0$.
+	By the definition of $H$, as $h$ is non-decreasing, $H(x) \leq x h(x)$. Hence, $g(x, y) \geq 0$ as $1 + b^{-1} \leq 2$.
+
+	Together, we have shown $H(\abs{x-y}) - H(x) - b^{-1} H(y) + 2 y h(x) \geq 0$ for all $x,y\geq0$.
+\end{enumerate}
+\end{proof}
+%
+\begin{lemma}\label{lmm:nondec:existence}
+	Let $X$ be a random variable with values in $[0,\infty)$. Then there is a strictly increasing, continuous, and concave function $h \colon [0,\infty) \to [0,\infty)$ with $h(\delta)\xrightarrow{\delta\to\infty}\infty$ such that $\Ex{h(X)} < \infty$.
+\end{lemma}
+%
+\begin{proof}
+	If there is $K > 0$ such that $\Prof{X < K} = 1$ take $h(x) = x$. Now, assume that $X$ is not almost surely bounded.
+	We first construct a non-decreasing function $\tilde h \colon [0,\infty) \to [0,\infty)$ such that $\tilde h (x) \xrightarrow{x\to\infty}\infty$ with $\Ex{\tilde h(X)} < \infty$.
+	Then we construct a function $h$ from $\tilde h$ with all desired properties.
+	
+	Let $F$ be the distribution function of $X$, $F(x) = \Prof{X \leq x}$.
+	Let $z_1 = 0$ and $z_{n+1} = \inf \cbOf{x\geq z_n +1 \,\big\vert\, 1-F(x) \leq \frac1n}$. As $F(x)\xrightarrow{x\to\infty} 1$, $z_n < \infty$. Furthermore, $z_{n+1}-z_n \geq 1$. Moreover, as $X$ is not almost surely bounded, $1-F(x) > 0$ for all $x\geq 0$. Set 
+	\begin{align*}
+		g(x) &= \sum_{n=1}^\infty (z_{n+1}-z_n)^{-1}n^{-2}\ind_{[z_n, z_{n+1})} (x)
+		\eqcm
+		\\
+		\tilde h(x) &= \int_0^x \frac{g(t)}{1-F(t)} \dl t
+		\eqfs
+	\end{align*}
+	Then
+	\begin{align*}
+		\lim_{x\to\infty} \tilde h(x) 
+		= 
+		\int_0^\infty \frac{g(t)}{1-F(t)} \dl t
+		\geq
+		\sum_{n=1}^\infty n^{-1} 
+		= 
+		\infty
+		\eqfs
+	\end{align*}
+	Moreover, $\tilde h(x)$ is strictly increasing, as $g(t)\geq 0$ and $1-F(t) \geq 0$.
+	The function $\tilde h$ is continuously differentiable everywhere except at point $z_n$, $n\in\N$. Thus,
+	\begin{align*}
+		\Ex{\tilde h(X)}
+		&=
+		\int_0^\infty \PrOf{\tilde h(X) > t} \dl t
+		\\&=
+		\int_0^\infty \PrOf{X > \tilde h^{-1}(t)} \dl t
+		\\&=
+		\int_0^\infty \tilde h\pr(t) \PrOf{X > t} \dl t
+		\\&=
+		\int_0^\infty g(t) \dl t
+		\\&=
+		\sum_{n=1}^\infty n^{-2}
+		<
+		\infty
+		\eqfs
+	\end{align*}
+	Let $a_0 = 1$, $x_0=0$, $x_{n+1} = \inf\cbOf{x \geq x_n + a_n^{-1} \,\big\vert\, \tilde h(x) \geq n+1}$ and $a_{n+1} = (x_{n+1} - x_n)^{-1}$. Let $h \colon [0,\infty) \to [0,\infty)$ be the linear interpolation of $(x_n, n)_{n\in\N_0}$. 
+	As $\tilde h(x) \xrightarrow{x\to\infty}\infty$, all $x_n$ are finite. Hence, $h(x) \xrightarrow{x\to\infty}\infty$. 
+	Because of $a_n > 0$, $h$ is strictly increasing.
+	Furthermore, $a_{n+1} \leq a_n$ as $x_{n+1} \geq x_n + a_n^{-1}$. As $h$ is continuous and $a_n$ is the derivative of $h$ in the interval $(x_n, x_{n+1})$, $h$ is concave. 
+	Lastly, $h(x) \leq \tilde h(x) + 1$. Thus, $\Ex{h(X)} < \infty$.
+\end{proof}
+%

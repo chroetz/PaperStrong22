@@ -1,0 +1,12 @@
+\begin{lemma}\label{lmm:precompact}
+Let $(\mc Q, d)$ be a complete metric space and $A\subset \mc Q$. Assume that all closed subsets $B\subset A$ are compact. Then $\overline A$ is compact.
+\end{lemma}
+\begin{proof}
+	Let $(a_k)_{k\in\N}\subset \overline{A}$. We show that $(a_k)_{k\in\N}$ has a converging subsequence with limit $a \in \overline{A}$, which implies compactness of $\overline{A}$.
+	
+	Let $\delta_n = 2^{-n}$. Define $B_n := \mc Q \setminus \ball_{\delta_n}(\mc Q \setminus A)$. The sets $B_n$ are closed and subsets of $A$. Thus, they are compact. Let $b_k^n\in\argmin_{b \in B_n} d(b, a_k)$. Such an element exists as $B_n$ is compact. Furthermore, $d(b_k^n, a_k) \leq \delta_n$. Define the subindex sequences $(k(n,\ell))_{\ell\in\N} \subset \N$ such that $k(0, \ell) = \ell$ and $(b^n_{k(n, \ell)})_{\ell\in\N}$ is a converging subsequence of $(b^n_{k(n-1, \ell)})_{\ell\in\N}$ with limit $b^n_{k(n, \ell)} \xrightarrow{\ell\to\infty}b^n_\infty$ and $d(b^n_{k(n, \ell)}, b^n_\infty) \leq \delta_\ell$. By the triangle inequality $d(b^{n_1}_k, b^{n_2}_k) \leq d(b^{n_1}_k, a_k) + d(b^{n_2}_k, a_k) \leq \delta_{n_1}+\delta_{n_2}$. Thus, $d(b^{n_1}_\infty, b^{n_2}_\infty) \leq \delta_{n_1}+\delta_{n_2}$, which makes $(b^{n}_\infty)_{n\in\N}$ a Cauchy-sequence. Define $a$ as its limit, i.e., $b^{n}_\infty \xrightarrow{n\to\infty} a$. As $b^{n}_\infty\in B_n \subset\overline{A}$, also $a\in\overline{A}$. Finally, the triangle inequality yields
+	\begin{equation*}
+		d(a_{k(n, n)}, a) \leq d(a_{k(n, n)}, b^n_{k(n, n)}) + d(b^n_{k(n, n)}, b^{n}_\infty) + d(b^{n}_\infty, a) \xrightarrow{n\to\infty}0\eqcm
+	\end{equation*}
+	i.e., $(a_{k(n, n)})_{n\in\N}$ is subsequence of $(a_k)_{k\in\N}$ which converges in $\overline{A}$.
+\end{proof}

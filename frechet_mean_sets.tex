@@ -1,0 +1,103 @@
+%
+\section{Fréchet Mean Sets}
+%
+%
+For a random variable $Y$ with values in $\R^s$ and $\Eof{\normof{Y}^2}<\infty$, it holds
+\begin{equation*}
+	\Ex{Y} = \argmin_{q\in\R^s} \Ex{d(Y,q)^2}
+	\eqcm
+\end{equation*}
+where $d(x,y) = \normof{x-y}$ is the Euclidean distance. We can also write 
+\begin{equation*}
+	\Ex{Y} = \argmin_{q\in\R^s} \Ex{d(Y,q)^2-d(Y,0)^2}
+	\eqcm
+\end{equation*}
+as we just add a constant term. In the latter equation, we only require $Y$ to be once integrable, $\Eof{\normof{Y}}<\infty$, instead of twice as $|\normof{y-q}^2-\normof{y}^2| \leq 2\normof{y}\normof{q}+\normof{q}^2$.
+
+The concept of Fréchet mean, proposed in \cite{frechet48}, builds upon this minimizing property of the Euclidean mean to generalize the expected value to random variables with values in a metric space. Let $(\mc Q, d)$ be a metric space. As a shorthand we may write $\ol qp$ instead of $d(q,p)$. Let $Y$ be a random variable with values in $\mc Q$. Fix an arbitrary element $o\in \mc Q$. The \emph{Fréchet mean set} of $Y$ is $M = \argmin_{q\in\mc Q} \Ex{\ol Yq^2- \ol Yo^2}$ assuming the expectations exist. 
+This definition does not depend on $o$. The reason for subtracting $\ol Yo^2$ is the same as in the Euclidean case: We need to make less moment assumptions to obtain a meaningful value: The triangle inequality implies
+\begin{equation*}
+\abs{\ol yq^2 - \ol yo^2} \leq \ol oq \br{\ol oq + 2 \ol yo}
+\end{equation*}
+for all $y,q,o\in\mc Q$. Thus, if $\Ex{\ol Yo} < \infty$, then $\Ex{\ol Yq^2 - \ol Yo^2} < \infty$ for all $q\in\mc Q$.
+
+In Euclidean spaces and other Hadamard spaces (metric spaces with nonpositive curvature), the Fréchet mean is always unique \cite[Proposition 4.3]{sturm03}. This is not true in general. On the circle, a uniform distribution on two antipodal points has two Fréchet means. For a deeper analysis of Fréchet means on the circle, see \cite{hotz15}. Similarly, Fréchet means on many positively curved spaces like (hyper-)spheres may not be unique. For the metric space $\mc Q = \R$ with $d(q,p) =\sqrt{\abs{q-p}}$, the Fréchet mean set is the set of medians, which may also be non-unique. These examples underline the importance of considering sets of minimizers in a general theory instead of assuming uniqueness.
+
+The notion of \textit{Fréchet mean} can be generalized to cases where the cost function to be minimized is not a squared metric, e.g.\ \cite{huckemann11}. We will not explicitly write down measurablity conditions, but silently demand that all spaces have the necessary measurable structure and all functions are measurable when necessary. Let $(\mc Q, d)$ be a metric space and $\mc Y$ be a set. Let $\mf c \colon \mc Y \times \mc Q \to \R$ be a function. Let $Y$ be a random variable with values in $\mc Y$. Let $M := \argmin_{q\in\mc Q} \Ex{\mf c(Y, q)}$ assuming the expectations exist. 
+In this context, $\mf c$ is called \textit{cost function}, $\mc Y$ is called \textit{data space}, $\mc Q$ is called \textit{descriptor space}, $q\mapsto\Ex{\mf c(Y, q)}$ is called \textit{objective function} (or \textit{Fréchet function}), and $M$ is called \textit{generalized Fréchet mean set} or \textit{$\mf c$-Fréchet mean set}. 
+
+This general scenario contains the setting of general M-estimation. It includes many important statistical frameworks like maximum likelihood estimation, where $\mc Q = \Theta$ parameterizes a family of densities $(f_\vartheta)_{\vartheta\in\Theta}$ on $\mc Y = \R^p$ and $\mf c(x,\vartheta) = -\log f_{\vartheta}(x)$, or linear regression, where $\mc Q = \R^{s+1}$, $\mc Y = (\{1\}\times\R^s) \times \R$, $\mf c((x,y),\beta) = (y - \beta\tr x)^2$. It also includes nonstandard settings, e.g.\ \cite{huckemann11}, where geodesics in $\mc Q$ are fitted to points in $\mc Y$.
+
+Fix an arbitrary element $o\in\mc Q$. We will use cost functions $\mf c(y, q) = H(\ol yq)-H(\ol yo)$, where $H(x) = \int_0^x h(t) \dl t$ for a non-decreasing function $h$, and $\mf c(y, q) = \ol yq^\alpha-\ol yo^\alpha$ with $\alpha>0$. In both cases the set of minimizers does not depend on $o$. We call the minimizers of the former cost function \textit{$H$-Fréchet means}. In the latter case, we call the minimizers \textit{power Fréchet means} or \textit{$\alpha$-Fréchet means}. We can interpret the different exponents $\alpha = 2$, $\alpha =1$, $\alpha \to 0$, $\alpha \to \infty$ as mean, median, mode, and circumcenter (or mid-range), respectively, see \cite{macqueen67}. The minimizers for $\alpha=1$ are sometimes called \textit{Fréchet median}, e.g.\ \cite{arnaudon13}. If $\mc Q$ is a Banach space, then they are called \textit{geometric} or \textit{spatial median}, e.g.\ \cite{kemperman87}.
+$H$-Fréchet means serve as a generalization of $\alpha$-Fréchet means for $\alpha>1$ as well as an intermediate result for proving strong laws of large numbers for $\alpha$-Fréchet mean sets with $\alpha\in(0,1]$.
+
+For a function $f\colon\mc Q\to\R$ and $\epsilon\geq0$, define 
+\begin{equation*}
+	\epsilon\text{-}\argmin_{q\in\mc Q} f(q) := \Set{q \in \mc Q \given  f(q) \leq \epsilon +\inf_{q\in\mc Q} f(q) }
+	\eqfs
+\end{equation*}
+Let $Y_1, \dots, Y_n$ be independent random variables with the same distribution as $Y$. Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. Let $M_n := \epsilon_n\text{-}\argmin_{q\in\mc Q} \frac1n \sum_{i=1}^n \mf c(Y_i, q)$. Our goal is to show almost sure convergence of elements in $M_n$ to elements in $M$. 
+%
+\begin{remark}
+	Considering sets of elements that minimize the objective only up to $\epsilon_n$ makes the results more relevant to applications in which Fréchet mean sets are approximated numerically.		
+	Furthermore, it may allow us to find more elements of $M$ in the limit of $M_n$ than for $\epsilon_n=0$, as discussed in \autoref{rem:epsilon_argmin} below and appendix \ref{sec:median}.
+\end{remark}
+%
+There are different possibilities of how a convergence of sets $M_n$ to a set $M$ can be described.
+%
+\begin{definition}
+	Let $(\mc Q, d)$ be a metric space.
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		Let $(B_n)_{n\in\N}$ with $B_n \subset \mc Q$ for all $n\in\N$. Then the \emph{outer limit} of $(B_n)_{n\in\N}$ is
+		\begin{equation*}
+			\outerlim_{n\to\infty} B_n := \bigcap_{n\in\N} \overline{\bigcup_{k\geq n} B_k}\eqcm
+		\end{equation*}
+		where $\overline B$ denotes the closure of the set $B$.
+		\item 
+		The \emph{one-sided Hausdorff distance} between $B, B^\prime \subset \MS$ is
+		\begin{equation*}
+			d_\subset(B,B^\prime) := \sup_{x\in B} \inf_{x^\prime\in B^\prime} d(x,x^\prime)\eqfs
+		\end{equation*}
+		\item 
+		The \emph{Hausdorff distance} between $B, B^\prime \subset \MS$ is
+		\begin{equation*}
+			d_\Hausdorff(B, B^\prime) 
+			:= 
+			\max(d_\subset(B,B^\prime), d_\subset(B^\prime,B))
+			\eqfs
+		\end{equation*}
+	\end{enumerate}
+\end{definition}
+%
+\begin{remark}
+\mbox{ }
+\begin{enumerate}[label=(\roman*)]
+	\item 
+		The outer limit is the set of all points of accumulation of all sequences $(x_n)_{n\in\N}$ with $x_n\in B_n$. We may write $\outerlim_{n\to\infty} B_n = \Set{q\in\mc Q \given \liminf_{n\to\infty} d(B_n, q) = 0}$, where $d(B, q) := \inf_{p\in B} d(p, q)$ for a subset $B\subset\mc Q$. The \textit{inner limit} is dual to the outer limit. It is defined as $\innerlim_{n\to\infty} B_n := \Set{q\in\mc Q \given \limsup_{n\to\infty} d(B_n, q) = 0}$. Clearly, $\innerlim_{n\to\infty} B_n \subset \outerlim_{n\to\infty} B_n$. Thus, results of the form $\outerlim_{n\to\infty} B_n \subset B$, which we show below, are stronger than $\innerlim_{n\to\infty} B_n \subset B$.
+	\item 
+		It holds $d_\subset(B,B^\prime)=0$ if and only if $B \subset \overline{B^\prime}$, but $d_\Hausdorff(B,B^\prime)=0$ if and only if $\overline B = \overline B^ \prime$. The function $d_\Hausdorff$ is a metric on the set of closed and bounded subsets of $\MS$.
+	\item 
+		Elements from a sequence of sets might have sub-sequences that have no point of accumulation and are bounded away from the outer limit of the sequence of sets. That cannot happen with the one-sided Hausdorff limit. Here, every sub-sequence is eventually arbitrarily close to the limiting set. As an example, the outer limit of the sequence of sets $\{0,n\}$, $n\in\N$ on the Euclidean real line is $\{0\}$, but $d_\subset(\{0,n\},\{0\})\xrightarrow{n\to\infty}\infty$. Aside from an element with diverging distance ($n$ in the example), another cause for the two limits to not align may be non-compactness of bounded sets: Consider the space $\ell^2$ of all sequences $(x_k)_{k\in\N}\subset\R$ with $\sum_{k=1}^\infty x_k^2 < \infty$ with distance $d((x_k)_{k\in\N}, (y_k)_{k\in\N}) = (\sum_{k=1}^\infty (x_k-y_k)^2)^\frac12$. Let $\underline{0}\in\ell^2$ be the sequence with all entries equal to 0. Let $e^n := (e^n_k)_{k\in\N}\in\ell^2$ with $e_n^n=1$ and $e^n_k=0$ for all $k\neq n$. Then $d_\subset(\{\underline 0, e_n\}, \{\underline 0\}) = 1$ for all $n\in\N$, but $\outerlim_{n\to\infty} \{\underline 0, e_n\} = \{\underline 0\}$.
+\end{enumerate}
+\end{remark}
+%
+We will state conditions so that $\outerlim_{n\to\infty} M_n \subset M$ almost surely or $d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$, where the index $\ms{a.s.}$ indicates almost sure convergence. It is not easily possible to show $d_\Hausdorff(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$ if $M$ is not a singleton, as discussed in \autoref{rem:epsilon_argmin} below and appendix \ref{sec:median}. These limit theorems may be called strong laws of large numbers of the Fréchet mean set or (strong) consistency of the empirical Fréchet mean set. Notably, in \cite{evans20} the connection to convergence in the sense of topology is made:
+If the set of closed subsets of $\MS$ is equipped with the \textit{Kuratowski upper topology}, a sequence of closed subsets $(B_n)_{n\in\N}$ converges to a closed subset $B$ if and only if $\outerlim_{n\to\infty} B_n \subset B$. 
+If the set of nonempty compact subsets of $\MS$ is equipped with the \textit{Hausdorff upper topology}, a sequence of nonempty compact subsets $(B_n)_{n\in\N}$ converges to a nonempty compact subset $B$ if and only if $d_{\subset}(B_n, B)\xrightarrow{n\to\infty} 0$. 
+
+\cite{ziezold77} shows a strong law in outer limit for Fréchet mean sets with a second moment condition.
+\cite{sverdrup81} shows a strong law in outer limit for power Fréchet mean sets in compact spaces.
+\cite{bhattacharya03} shows almost sure convergence of Fréchet mean sets in one-sided Hausdorff distance with a second moment condition.
+The independent parallel work \cite{evans20} shows strong laws in outer limit and one-sided Hausdorff distance for $\alpha$-Fréchet mean sets requiring $\Ex{\ol Yo^{\alpha}} < \infty$, which is a second moment condition for the Fréchet mean.
+In contrast, we show strong laws of large numbers for power Fréchet mean sets in outer limit and in one-sided Hausdorff distance with less moment assumptions: For power $\alpha>1$, we require $\Ex{\ol Yo^{\alpha-1}} < \infty$, and for $\alpha\in (0,1]$ no moment assumption is made, see \autoref{cor:cons_da} and \autoref{cor:median}. Thus, $\alpha$-Fréchet means may be of interest in robust statistics.
+\cite{huckemann11} shows almost sure convergence in one-side Hausdorff distance as well as in outer limit for generalized Fréchet means. Our results for $\mf c$-Fréchet means require slightly less strict assumptions, see \autoref{thm:epi} and \autoref{thm:consistency}, which make them applicable in a larger class of settings and allows us to derive our results for $H$- and $\alpha$-Fréchet means with minimal moment assumptions.
+Results in \cite{artstein95, korf01, choirat03} imply strong laws and ergodic theorems in outer limit for generalized Fréchet means. We recite parts of these results to state \autoref{thm:epi}.
+Furthermore, we show strong laws of large numbers for $H$-Fréchet means sets in outer limit, \autoref{cor:nondec:epi}, and one-sided Hausdorff distance, \autoref{cor:nondec:onehaus}.
+When $M$ is singleton a quantitative version (rates of convergence) of the results presented in this article is given in \cite{schoetz19}.
+
+Before we consider the probabilistic setting, we present theory on convergence of minimizing sets for deterministic functions in section \ref{sec:det}, where we partially follow \cite{rockafellar98}. Thereafter, we derive strong laws of large numbers for $\mf c$-Fréchet mean sets in section \ref{sec:gen}, for $H$-Fréchet mean sets in section \ref{sec:nondec}, and for $\alpha$-Fréchet mean sets in section \ref{sec:power}. 
+Appendix \ref{sec:median} uses the median as a simple example to illustrate some peculiarities when dealing with sets of Fréchet means.
+All strong laws in the main part of this article build upon \cite[Theorem 1.1]{korf01} -- a deep convergence result for functions $\MS \to \R$. In appendix \ref{sec:alt}, we show a different route to a strong law in one-side Hausdorff distance. This is illustrative, but requires slightly stricter assumptions. 
+In appendix \ref{sec:aux} some auxiliary results are stated and proven.
+%

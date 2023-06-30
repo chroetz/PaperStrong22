@@ -1,0 +1,53 @@
+%
+\section{Strong Laws for $\alpha$-Fréchet Mean Sets}\label{sec:power}
+%
+Let $(\mc Q, d)$ be a metric space. Let $(\Omega, \Sigma, \Pr)$ be a probability space that is silently underlying all random variables in this section. Let $Y$ be a random variable with values in $\mc Y$.
+Let $\alpha > 0$. Fix an arbitrary element $o\in\mc Q$. Denote the $\alpha$-Fréchet mean set of $Y$ as $M = \argmin_{q\in\mc Q} \Ex{\ol Yq^\alpha - \ol Yo^\alpha}$.
+Let $Y_1, \dots, Y_n$ be independent random variables with the same distribution as $Y$.
+Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n\to\infty}0$. Set $M_n =\epsilon_n\text{-}\argmin_{q\in\mc Q} \frac1n \sum_{i=1}^n (\ol {Y_i}q^\alpha - \ol{Y_i}o^\alpha)$.
+%
+\begin{corollary}\label{cor:cons_da}
+	Let $\alpha > 1$.
+	Assume $\Ex{\ol Yo^{\alpha-1}} < \infty$ and \textsc{Polish}.	
+	\begin{enumerate}[label=(\roman*)]
+	\item Then $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
+	\item Additionally, assume \textsc{SampleHeineBorel}.
+		Then $d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$.
+	\end{enumerate}	
+\end{corollary}
+%
+\begin{proof}
+	Set $h(x) = \alpha^{-1}x^{\alpha-1}$. This function is non-decreasing, fulfills \textsc{Additivity} with $b = 2^{\alpha-1}$ and \textsc{InfiniteIncrease}.
+	Due to $\Ex{\ol Yo^{\alpha-1}} < \infty$, \textsc{$h$-Moment} is fulfilled. Furthermore, $H(x) = x^\alpha$. Thus, \autoref{cor:nondec:onehaus} and \autoref{cor:nondec:epi} imply the claims.
+\end{proof}
+%
+\begin{corollary}\label{cor:median}
+	Let $\alpha \in (0,1]$. Assume \textsc{Polish}.
+	\begin{enumerate}[label=(\roman*)]
+	\item Then $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
+	\item Additionally, assume \textsc{SampleHeineBorel}.
+		Then $d_\subset(M_n, M) \xrightarrow{n\to\infty}_{\ms{a.s.}} 0$.
+	\end{enumerate}	
+\end{corollary}
+%
+\begin{proof}
+First, consider the case $\alpha=1$.
+Apply \autoref{lmm:nondec:existence} (appendix) on $\ol Yo$ to obtain a function $h \colon [0,\infty) \to [0,\infty)$ which is strictly increasing, continuous, concave, fulfills \textsc{InfiniteIncrease}, and $\Ex{h(\ol Yo)} < \infty$. Concavity implies \textsc{Additivity} with $b=1$.
+As its derivative is strictly increasing, $H(x) = \int_0^x h(t) \dl t$ is convex and strictly increasing. Thus, $H$ has an inverse $H^{-1}$ and $H^{-1}$ is concave. 
+This implies that $d_H(q,p) = H^{-1}(\ol qp)$ is a metric. 
+
+As $H^{-1}$ is concave, there are $u_0, u_1 \in[0,\infty)$ such that $H^{-1}(x) \leq u_0 + u_1 x$ for all $x\geq0$.
+As $h$ is concave, there are $v_0, v_1\in[0,\infty)$ such that $h(u_0 + u_1 x) \leq v_0 + v_1 h(x)$ for all $x\geq 0$.
+Thus, $\Ex{h(d_H(Y, o))} = \Ex{h(H^{-1} (\ol Yo))} \leq v_0 + v_1 \Ex{h(\ol Yo)} < \infty$.
+Hence, \textsc{$h$-Moment} is true for the metric $d_H$.
+
+Moreover, \textsc{Polish} and \textsc{HeineBorel}-type properties of $(\mc Q, d)$ are preserved in $(\mc Q, d_H)$, as $H^{-1}$ is strictly increasing, concave, and continuous, with $H^{-1}(0) = 0$ and $H^{-1}(\delta)\xrightarrow{\delta\to\infty}\infty$, and thus, the properties boundedness, compactness, separability, and completeness coincide for $d$ and $d_H$.
+Applying \autoref{cor:nondec:epi} and \autoref{cor:nondec:onehaus} on the minimizers of $\Ex{H(d_H(Y, q)) - H(d_H(Y, o))}  = \Ex{\ol  Yq - \ol Yo}$ now yields the claims for $\alpha=1$.
+
+For $\alpha \in (0,1)$ just note, that $\tilde d(q,p) = d(q,p)^\alpha$ is a metric, which preserves \textsc{Polish} and \textsc{HeineBorel}-type properties, and apply the result for $\alpha = 1$ on $\tilde d$.
+\end{proof}
+%
+\begin{remark}
+	 For convergence, we need the $(\alpha-1)$-moment to be finite in the case of $\alpha \geq 1$. \cite[Corollary 5]{schoetz19} shows that in metric spaces with nonnegative curvature the typical parametric rate of convergence $n^{-\frac12}$ is obtained for $\alpha$-Fréchet means assuming the $2(\alpha-1)$-moment to be finite in the case of $\alpha\in[1,2]$ under some further conditions.
+\end{remark}
+%
