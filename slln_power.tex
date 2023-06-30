@@ -17,7 +17,7 @@ Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n
 \end{corollary}
 %
 \begin{proof}
-	Set $h(x) = \alpha^{-1}x^{\alpha-1}$. This function is non-decreasing, fulfills \textsc{Additivity} with $b = 2^{\alpha-1}$ and \textsc{InfiniteIncrease}.
+	Set $h(x) = \alpha x^{\alpha-1}$. This function is non-decreasing, fulfills \textsc{Additivity} with $b = 2^{\alpha-1}$ and \textsc{InfiniteIncrease}.
 	Due to $\Ex{\ol Yo^{\alpha-1}} < \infty$, \textsc{$h$-Moment} is fulfilled. Furthermore, $H(x) = x^\alpha$. Thus, \autoref{cor:nondec:onehaus} and \autoref{cor:nondec:epi} imply the claims.
 \end{proof}
 %
@@ -32,7 +32,7 @@ Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n
 %
 \begin{proof}
 First, consider the case $\alpha=1$.
-Apply \autoref{lmm:nondec:existence} (appendix) on $\ol Yo$ to obtain a function $h \colon [0,\infty) \to [0,\infty)$ which is strictly increasing, continuous, concave, fulfills \textsc{InfiniteIncrease}, and $\Ex{h(\ol Yo)} < \infty$. Concavity implies \textsc{Additivity} with $b=1$.
+Apply \autoref{lmm:nondec:existence} (appendix) on $\ol Yo$ to obtain a function $h \colon [0,\infty) \to [0,\infty)$ which is strictly increasing, continuous, concave, fulfills \textsc{InfiniteIncrease}, and $\Ex{h(\ol Yo)} < \infty$. Concavity implies \textsc{Additivity} with $b=2$.
 As its derivative is strictly increasing, $H(x) = \int_0^x h(t) \dl t$ is convex and strictly increasing. Thus, $H$ has an inverse $H^{-1}$ and $H^{-1}$ is concave. 
 This implies that $d_H(q,p) = H^{-1}(\ol qp)$ is a metric. 
 
