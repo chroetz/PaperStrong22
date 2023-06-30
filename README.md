@@ -1,6 +1,6 @@
 LaTeX repository for the paper 
 
- Christof Schötz (2022) Strong laws of large numbers for generalizations of Fréchet mean sets, Statistics, 56:1, 34-52, DOI: 10.1080/02331888.2022.2032063 
+ Christof Schötz (2022) Strong laws of large numbers for generalizations of Fréchet mean sets, Statistics, 56:1, 34-52, DOI: [10.1080/02331888.2022.2032063](https://doi.org/10.1080/02331888.2022.2032063)
  
  arXiv: https://arxiv.org/abs/2012.12762
 
