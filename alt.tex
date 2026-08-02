@@ -1,5 +1,5 @@
 In this section, we show an alternative proof of a strong law of large numbers for generalized Fréchet mean sets in one-sided Hausdorff distance. Although the final result, \autoref{thm:alt:consistency}, is weaker than \autoref{thm:consistency}, it is very illustrative to follow this line of proof:
-In contrast to the arguments in the main part of the article, it does not rely on the powerful result \cite[Theorem 1.1]{korf01}, which seems to be rather complex to prove. Instead our reasoning here is simpler and more self-contained.
+In contrast to the arguments in the main part of the article, it does not rely on the powerful result \cite[Theorem 8.2]{korf01}, which seems to be rather complex to prove. Instead our reasoning here is simpler and more self-contained.
 Furthermore, a comparison between convergence in outer limit and in one-sided Hausdorff distance seems more natural in view of the deterministic results \autoref{thm:convOfMini} and \autoref{thm:alt:convOfMini}, and the stochastic results \autoref{thm:epi} and \autoref{thm:alt:consistency}.
 %
 %
@@ -38,13 +38,19 @@ The last definition directly implies that $d_\subset(\delta\text{-}\argmin f, \a
 	\begin{equation*}
 		d_\subset(\epsilon_n\text{-}\argmin f_n, \argmin f)\xrightarrow{n\to\infty}
 		0
+		\eqfs
 	\end{equation*}
-	and
+	If, in addition, $\epsilon_n\text{-}\argmin f_n \neq \emptyset$ for all $n$ large enough, then also
 	\begin{equation*}
 		\inf f_n \xrightarrow{n\to\infty} \inf f
 		\eqfs
 	\end{equation*}
 \end{theorem}
+%
+\begin{remark}\label{rem:alt:nonempty}
+	The additional condition for the convergence of the infima cannot be dropped: On $\MS=\R$, let $\epsilon_n = 0$, $f(x) = x^2$, and $f_n(x) = f(x)$ for $\abs x \leq n$, $f_n(x) = -1 + \abs x^{-1}$ for $\abs x > n$. Then $f_n\ubsconv{n}f$, $f$ has approachable minimizers, and $\argmin f_n = \emptyset$, so that $(\argmin f_n)_{n\in\N}$ is eventually bounded and $d_\subset(\argmin f_n, \argmin f) = 0$. But $\inf f_n = -1$ for all $n\in\N$, whereas $\inf f = 0$.
+	Note that $\epsilon_n\text{-}\argmin f_n \neq\emptyset$ holds, e.g., if $\epsilon_n > 0$ and $\inf f_n > -\infty$.
+\end{remark}
 %
 \begin{proof}
 		Let $\epsilon >0$. As $f$ has approachable minimizers, there is $\delta > 0$ such that $(3\delta)\text{-}\argmin f \subset \ball_\epsilon(\argmin f)$; also $\argmin f \neq \emptyset$. Let $y\in\argmin f$. As $f_n(y) \xrightarrow{n\to\infty} f(y)$, there is $n_1\in\N$ such that $\inf f_n \leq \inf f + \delta$ for all $n \geq n_1$.		
@@ -57,8 +63,14 @@ The last definition directly implies that $d_\subset(\delta\text{-}\argmin f, \a
 		\end{equation*}
 		Thus, $x \in (3\delta)\text{-}\argmin f$. By the choice of $\epsilon$ and $\delta$, we obtain $\epsilon_n\text{-}\argmin f_n \subset \ball_\epsilon(\argmin f)$ or equivalently $d_{\subset}(\epsilon_n\text{-}\argmin f_n, \argmin f) \leq \epsilon$.
 		
-		Finally, we show the convergence of the infima. We already know $\inf f_n \leq \inf f + \epsilon$ for all $\epsilon > 0$ and $n$ large enough.
-		If $\inf f_n \xrightarrow{n\to\infty} \inf f$ does not hold, there is a sequence $x_n \in \epsilon_n\text{-}\argmin f_n$ and $\epsilon > 0$ such that $f_n(x_n) < \inf f - \epsilon$ for all $n$ large enough. As before, because of eventual boundedness and uniform convergence on bounded sets, we have $\sup_{k\in\N}\abs{f_n(x_k) - f(x_k)} \xrightarrow{n\to\infty} 0$. Therefore, for all $\epsilon >0$ we have $f(x_n) \leq f_n(x_n) + \epsilon$ for $n$ large enough, which contradicts $f_n(x_n) < \inf f - \epsilon$.
+		Finally, assume $\epsilon_n\text{-}\argmin f_n \neq \emptyset$ for all $n$ large enough and let us show the convergence of the infima.
+		As $\argmin f \neq \emptyset$, we may pick $y \in \argmin f$. From $f_n(y) \xrightarrow{n\to\infty} f(y) = \inf f$ and $\inf f_n \leq f_n(y)$, we obtain $\limsup_{n\to\infty} \inf f_n \leq \inf f$.
+		Assume $\liminf_{n\to\infty} \inf f_n < \inf f$. Then there is $\eta > 0$ such that $\inf f_n < \inf f - 2\eta$ for infinitely many $n$. Let $n_3$ and $B = \bigcup_{n\geq n_3} \epsilon_n\text{-}\argmin f_n$ be as above. As $f_n \xrightarrow{n\to\infty}_{\ubs} f$ and $\diam(B)<\infty$, there is $n_5\in\N$ such that $\sup_{x\in B}\abs{f_n(x) - f(x)} \leq \frac12 \eta$ for all $n \geq n_5$. As $\epsilon_n \xrightarrow{n\to\infty} 0$, there is $n_6\in\N$ such that $\epsilon_n \leq \eta$ for all $n\geq n_6$. By assumption, there is $n_7\in\N$ such that $\epsilon_n\text{-}\argmin f_n \neq \emptyset$ for all $n \geq n_7$. For every one of the infinitely many $n \geq \max(n_3, n_5, n_6, n_7)$ with $\inf f_n < \inf f - 2\eta$, choose $x_n \in \epsilon_n\text{-}\argmin f_n$. Then $x_n \in B$ and
+		\begin{equation*}
+			f(x_n) \leq f_n(x_n) + \tfrac12\eta \leq \inf f_n + \epsilon_n + \tfrac12\eta < \inf f - 2\eta + \eta + \tfrac12\eta < \inf f
+			\eqcm
+		\end{equation*}
+		which is a contradiction. Hence, $\inf f_n \xrightarrow{n\to\infty} \inf f$.
 \end{proof}
 %
 In the following, we construct examples to show that none of the conditions for one-sided Hausdorff convergence can be dropped.
@@ -106,7 +118,7 @@ Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n
 \end{theorem}
 %
 \begin{proof}
-Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$.  The proof consists of following steps:
+Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$.  The proof consists of the following steps:
 \begin{enumerate}
 \item Show that $F_n \xrightarrow{n\to\infty}_{\ubs} F$ almost surely.
 \item Reduction to a bounded set.

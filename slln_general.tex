@@ -16,11 +16,15 @@ Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n
 \item 
 	\textsc{Integrable}: 
 	$\Ex{\abs{\mf c(Y, q)}} < \infty$ for all $q\in\mc Q$.
-\item 
-	\textsc{IntegrableInf}: 
-	$\Ex{\inf_{q \in \mc Q}\mf c(Y, q)} > - \infty$.
+\item
+	\textsc{IntegrableInf}:
+	$\Ex{\inf_{q \in B}\mf c(Y, q)} > - \infty$ for every bounded set $B \subset \mc Q$.
 \end{itemize}
 \end{assumptions}
+%
+\begin{remark}\label{rem:integrableinf}
+	\textsc{IntegrableInf} is a local condition. It is implied by the stronger, global requirement $\Ex{\inf_{q \in \mc Q}\mf c(Y, q)} > - \infty$, but it is considerably less restrictive: for the cost function $\mf c(y,q) = H(\ol yq) - H(\ol yo)$ of section \ref{sec:nondec} with $\mc Y = \mc Q$, the global requirement is equivalent to $\Ex{H(\ol Yo)} < \infty$ -- as $H\geq0$ and $\mf c(y,y) = -H(\ol yo)$, we have $\inf_{q\in\mc Q}\mf c(y, q) = -H(\ol yo)$ -- whereas the local condition already follows from $\Ex{h(\ol Yo)} < \infty$, see the proof of \autoref{cor:nondec:epi}.
+\end{remark}
 %
 \begin{theorem}\label{thm:epi}
 	Assume \textsc{Polish}, \textsc{LowerSemiContinuity}, \textsc{Integrable}, and \textsc{IntegrableInf}.
@@ -33,13 +37,13 @@ Choose $(\epsilon_n)_{n\in\N}\subset [0,\infty)$ with $\epsilon_n \xrightarrow{n
 %
 \begin{proof}
 Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. By \textsc{Integrable}, $F(q)<\infty$.
-\cite[Theorem 1.1]{korf01} states that $F_n \xrightarrow{n\to\infty}_{\ms{epi}} F$ almost surely if \textsc{Polish}, \textsc{LowerSemiContinuity}, and \textsc{IntegrableInf} are true. \autoref{thm:convOfMini} then implies $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
+\cite[Theorem 8.2]{korf01} states that $F_n \xrightarrow{n\to\infty}_{\ms{epi}} F$ almost surely if \textsc{Polish}, \textsc{LowerSemiContinuity}, and \textsc{IntegrableInf} are true: \textsc{IntegrableInf} implies that $\mf c$ is \textit{locally inf-integrable} in the sense of \cite[Definition 4.2]{korf01}, as every $q\in\mc Q$ has a closed bounded neighborhood; the additional requirement of a countable subset of $\mc Q \times \R$ that is dense in the epigraph of $F$ is automatically fulfilled here, as $\mc Q\times\R$ is separable by \textsc{Polish} and every subset of a separable metric space is separable; and the shift on the sequence space of the independent and identically distributed $(Y_i)_{i\in\N}$ is measure preserving and ergodic. \autoref{thm:convOfMini} then implies $\outerlim_{n\to\infty}\, M_n \subset M$ almost surely.
 \end{proof}
 %
 \begin{assumptions}\mbox{ }
 \begin{itemize}
 	\item \textsc{HeineBorel}: Every closed bounded set in $\mc Q$ is compact.
-	\item \textsc{SampleHeineBorel}: Almost surely following is true: There is $N_0\in\N$ such that every closed and bounded subset of $\bigcup_{n\geq N_0} M_n$ is compact.
+	\item \textsc{SampleHeineBorel}: Almost surely, the following is true: There is $N_0\in\N$ such that every closed and bounded subset of $\bigcup_{n\geq N_0} M_n$ is compact.
 	\item \textsc{UpperBound}: $\Ex{\sup_{q\in B} \abs{\mf c(Y,q)}} < \infty$ for all bounded sets $B\subset\mc Q$.
 	\item \textsc{LowerBound}: There are $o\in\mc Q$, $\psi^+, \psi^- \colon [0,\infty) \to [0,\infty)$, $\mf a^+, \mf a^- \in(0,\infty)$, and $\sigma(Y_1, \dots, Y_n)$-measurable random variables $\mf a^+_n, \mf a^-_n \in[0,\infty)$ such that 
 	\begin{align*}
@@ -54,11 +58,12 @@ Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. 
 \begin{remark}\label{rem:on_ass1}\mbox{ }
 \begin{itemize}
 \item 
-	Following implications hold:
+	The following implications hold:
 	\begin{align*}
 	\textsc{HeineBorel} &\Rightarrow \textsc{Polish}\eqcm\\
 	\textsc{HeineBorel} &\Rightarrow \textsc{SampleHeineBorel}\eqcm\\
-	\textsc{UpperBound} &\Rightarrow \textsc{Integrable}\eqfs
+	\textsc{UpperBound} &\Rightarrow \textsc{Integrable}\eqcm\\
+	\textsc{UpperBound} &\Rightarrow \textsc{IntegrableInf}\eqfs
 	\end{align*}
 \item On \textsc{HeineBorel}:
 	A space enjoying this property is also called \textit{boundedly compact} or \textit{proper} metric space.
@@ -82,7 +87,7 @@ Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. 
 \end{theorem}
 %
 \begin{proof}
-The proof consists of following steps:
+The proof consists of the following steps:
 \begin{enumerate}
 \item Apply \autoref{thm:epi}.
 \item Reduction to a bounded set.
@@ -96,12 +101,26 @@ The proof consists of following steps:
 
 \noindent
 \underline{\smash{Step 2.}}
-Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$. 
-We want to show that there is a bounded set $B_1 \subset \mc Q$ such that $F(q) \geq F(m) + 1$ and $F_n(q) \geq F_n(m) + 1$ for all $q\in \mc Q \setminus B_1$ and $m \in M$. If $\mc Q$ is bounded, we can take $B_1 = \mc Q$. Assume $\mc Q$ is not bounded. 
+Define $F(q) = \Ex{\mf c(Y, q)}$, $F_n(q) = \frac1n\sum_{i=1}^n \mf c(Y_i, q)$.
+We want to show that there is a bounded set $B_1 \subset \mc Q$ such that $F(q) \geq \inf F + 1$ and $F_n(q) \geq \inf F_n + 1$ for all $q\in \mc Q \setminus B_1$ and all $n$ large enough. If $\mc Q$ is bounded, we can take $B_1 = \mc Q$ and $N_1 = 1$. Assume $\mc Q$ is not bounded.
 
-Let $m \in M$. By \textsc{UpperBound}, $F(m) < \infty$. Let $o\in\mc Q$ from \textsc{LowerBound}.
-Due to \textsc{LowerBound}, $F(q) \geq \mf a^+ \psi^+(\delta) - \mf a^- \psi^-(\delta) \geq  F(m) + 2$ for all $q\in\mc Q\setminus \ball_\delta(o)$ and $\delta$ large enough. This holds for all $m\in M$ as $F(m)$ does not change with $m$. We set $B_1 = \ball_\delta(o)$. For $F_n$, it holds $F_n(m) \xrightarrow{n\to\infty}_{\ms{a.s.}} F(m)$ and $\inf_{q\in\mc Q \setminus B_1} F_n(q) \geq \mf a^+_n \psi^+(\delta) - \mf a^-_n \psi^-(\delta)$ with $\mf a^+_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^+$ and $\mf a^-_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^-$.
-Thus, there is a random variable $N_1$ such that almost surely $F_n(q) \geq F_n(m) + 1$ for all $n \geq N_1$, $q\in \mc Q \setminus B_1$, and $m\in M$.
+Let $o\in\mc Q$ from \textsc{LowerBound}. By \textsc{UpperBound}, $F(o) < \infty$. For $\mf b^+, \mf b^- \in(0,\infty)$ and $\delta \geq 0$ set
+\begin{equation*}
+	G_{\mf b^+, \mf b^-}(\delta)
+	:=
+	\inf_{t \geq \delta} \br{\mf b^+ \psi^+(t) - \mf b^- \psi^-(t)}
+	\eqfs
+\end{equation*}
+As $\psi^\pm \geq 0$, we have $\mf b^+ \psi^+(t) - \mf b^- \psi^-(t) \geq \max(1,\psi^-(t)) \br{\mf b^+ \frac{\psi^+(t)}{\max(1,\psi^-(t))} - \mf b^-}$ for all $t\geq0$. Since $\psi^+(t)/\max(1, \psi^-(t))\xrightarrow{t\to\infty}\infty$ and $\max(1,\psi^-(t))\geq1$, this implies
+\begin{equation}\label{eq:cons:G}
+	G_{\mf b^+, \mf b^-}(\delta) \xrightarrow{\delta\to\infty} \infty
+	\eqfs
+\end{equation}
+Note that no monotonicity of $\psi^+$ or $\psi^-$ is assumed, so it is essential to take the infimum over all $t \geq \delta$ here.
+Due to \textsc{LowerBound} and $\ol qo \geq \delta$ for $q \in \mc Q\setminus\ball_\delta(o)$, we obtain $F(q) \geq G_{\mf a^+, \mf a^-}(\delta)$ for all $q\in\mc Q\setminus \ball_\delta(o)$.
+As $\mf a^+_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^+ > 0$ and $\mf a^-_n \xrightarrow{n\to\infty}_{\ms{a.s.}} \mf a^-$, there is a random variable $N_1$ such that almost surely $\mf a^+_n \geq \frac12 \mf a^+$ and $\mf a^-_n \leq \mf a^- +1$ for all $n\geq N_1$; enlarging $N_1$ if necessary, we may also assume $F_n(o) \leq F(o) + 1$ for all $n \geq N_1$, which is possible by the strong law of large numbers and \textsc{Integrable}. Hence, almost surely, $F_n(q) \geq G_{\frac12\mf a^+, \mf a^-+1}(\delta)$ for all $n\geq N_1$ and all $q\in\mc Q\setminus \ball_\delta(o)$.
+By \eqref{eq:cons:G}, we can choose $\delta$ large enough such that $G_{\mf a^+, \mf a^-}(\delta) \geq F(o) + 1$ and $G_{\frac12\mf a^+, \mf a^-+1}(\delta) \geq F(o) + 2$. We set $B_1 = \ball_\delta(o)$.
+Then, almost surely, $F(q) \geq F(o) + 1 \geq \inf F + 1$ and $F_n(q) \geq F(o)+2 \geq F_n(o) + 1 \geq \inf F_n + 1$ for all $q\in \mc Q \setminus B_1$ and $n \geq N_1$. In particular, $M \subset B_1$ and, for $\epsilon_n < 1$ and $n\geq N_1$, also $M_n \subset B_1$.
 
 %
 \noindent

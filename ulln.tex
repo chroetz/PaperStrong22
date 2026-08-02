@@ -10,13 +10,13 @@ Let $f \colon \mc Y \times B \to \R$ be such that $q \mapsto f(Y, q)$  is almost
 \end{theorem}
 %
 \begin{proof}
-Let $\epsilon > 0$. As $B$ is compact, there is a finite set $\cb{q_1, \dots, q_k} \subset \mc Q$ such that $B \subset \bigcup_{\ell=1}^k\ball_\epsilon(q_\ell)$. We split the supremum,
+Let $\epsilon > 0$. As $B$ is compact, the open cover $(\ball_\epsilon(q))_{q \in B}$ of $B$ has a finite subcover, i.e., there is a finite set $\cb{q_1, \dots, q_k} \subset B$ such that $B \subset \bigcup_{\ell=1}^k\ball_\epsilon(q_\ell)$. We split the supremum,
 \begin{align*}
 	&\sup_{q\in B} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q) - \Ex{f(Y, q)}}
 	\\&\leq
 	\sup_{\ell \in \cb{1,\dots, k}} 
-	\sup_{q\in \ball_\epsilon(q_\ell)}  
-		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}} 
+	\sup_{q\in B \cap \ball_\epsilon(q_\ell)}
+		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}}
 	\\&\quad+ 
 	\sup_{\ell \in \cb{1,\dots, k}} \abs{\frac 1n \sum_{i=1}^n f(Y_i, q_\ell) - \Ex{f(Y, q_\ell)}}
 	\eqfs
@@ -29,8 +29,8 @@ For the second summand, by the standard strong law of large numbers applied to e
 For the first summand,
 \begin{align*}
 	&\sup_{\ell \in \cb{1,\dots, k}} 
-	\sup_{q\in \ball_\epsilon(q_\ell)}  
-		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}} 
+	\sup_{q\in B \cap \ball_\epsilon(q_\ell)}
+		\abs{\frac 1n \sum_{i=1}^n \br{f(Y_i, q) - f(Y_i, q_\ell)} - \Ex{f(Y, q) - f(Y, q_\ell)}}
 	\\& \leq
 	\frac 1n \sum_{i=1}^n \sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y_i, q) - f(Y_i, p)} 
 	+ 
@@ -57,9 +57,9 @@ where $a_\epsilon = 2 \Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q)
 As $q \mapsto f(Y, q)$ is almost surely continuous and $B$ is compact, $q \mapsto f(Y, q)$ is almost surely uniformly continuous, i.e., for all $\delta > 0$ there is $\varepsilon(\delta, Y) > 0$ such that $\abs{f(Y,q)-f(Y,p)} \leq \delta$ for all $\ol qp \leq \varepsilon(\delta, Y)$.
 As $\Ex{Z} < \infty$, we can use dominated convergence to obtain 
 \begin{align*}
-	\lim_{\epsilon\searrow0} 	\Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, p) - f(Y, p)} }
+	\lim_{\epsilon\searrow0} 	\Ex*{\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q) - f(Y, p)} }
 	&=
-	\Ex*{\lim_{\epsilon\searrow0}\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, p) - f(Y, p)} }
+	\Ex*{\lim_{\epsilon\searrow0}\sup_{q,p\in B,\, \sol qp \leq \epsilon} \abs{f(Y, q) - f(Y, p)} }
 	=
 	0
 	\eqfs
